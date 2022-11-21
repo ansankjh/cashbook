@@ -4,6 +4,7 @@ public class Cash {
 	private int cashNo;
 	// private Category category; // INNER JOIN -> Cash타입
 	private int categoryNo; // fk가 있다 INNER JOIN이 있을수 있다 -> 하지만 우리는 Map 타입을 쓴다.
+	private String cashDate;
 	private long cashPrice;
 	private String cashMemo;
 	private String updatedate;
@@ -21,6 +22,12 @@ public class Cash {
 	}
 	public void setCategoryNo(int categoryNo) {
 		this.categoryNo = categoryNo;
+	}
+	public String getCashDate() {
+		return cashDate;
+	}
+	public void setCashDate(String cashDate) {
+		this.cashDate = cashDate;
 	}
 	public long getCashPrice() {
 		return cashPrice;
@@ -46,6 +53,9 @@ public class Cash {
 	public void setCreatedate(String createdate) {
 		this.createdate = createdate;
 	}
+	
+	
+	
 	
 	
 	
