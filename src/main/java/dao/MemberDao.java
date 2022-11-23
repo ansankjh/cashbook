@@ -21,46 +21,126 @@ public class MemberDao {
 		--> 입력값과 반환값을 결정해야 한다.
 		--> 입력값은 없다. 반환값은 Connection타입의 결과값이 남아야한다.
 		*/
-		
+		// 드라이버 로딩, 연결
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
-		String sql = "SELECT member_id memberId, member_name memberName FROM MEMBER WHERE member_id=? AND member_pw=?";
-		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setString(1, paramMember.getMemberId()); // ?는 매개변수로 들어온 paramMember
-		stmt.setString(2, paramMember.getMemberPw());
-		ResultSet rs = stmt.executeQuery();
-		if(rs.next( )) {
+		// 쿼리문 작성
+		String loginSql = "SELECT member_id memberId, member_name memberName FROM MEMBER WHERE member_id=? AND member_pw=PASSWORD(?)";
+		// 쿼리 객체 생성
+		PreparedStatement loginStmt = conn.prepareStatement(loginSql);
+		// 쿼리문 ?값 지정
+		loginStmt.setString(1, paramMember.getMemberId()); // ?는 매개변수로 들어온 paramMember
+		loginStmt.setString(2, paramMember.getMemberPw());
+		// 쿼리 실행
+		ResultSet loginRs = loginStmt.executeQuery();
+		if(loginRs.next( )) {
 			resultMember = new Member();
-			resultMember.setMemberId(rs.getString("memberId"));
-			resultMember.setMemberName(rs.getString("memberName"));
-			
+			resultMember.setMemberId(loginRs.getString("memberId"));
+			resultMember.setMemberName(loginRs.getString("memberName"));			
 		}
 		
 		
-		rs.close();
-		stmt.close();
-		conn.close(); // 반납
-		
-		return paramMember;
+		loginRs.close();
+		loginStmt.close();
+		conn.close(); // 반납		
+		return resultMember;
 	}
+	// 아이디 중복 방지
+	public Boolean memberCk(String memberId) throws Exception {
+		// 드라이버 로딩 , 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		// 쿼리문 작성
+		String ckSql = "SELECT member_id memberId FROM MEMBER WHERE member_id = ?";
+		// 쿼리 객체 생성
+		PreparedStatement ckStmt = conn.prepareStatement(ckSql);
+		// 쿼리문 ?값 지정
+		ckStmt.setString(1, memberId);
+		// 쿼리 실행
+		ResultSet ckRs = ckStmt.executeQuery();
+		if(ckRs.next()) {
+			ckRs.close();
+			ckStmt.close();
+			conn.close();
+			return true;
+		} else {
+			ckRs.close();
+			ckStmt.close();
+			conn.close();
+			return true;
+		}
+		
+	}
+	
 	
 	// 회원가입
 	public int insertMember(Member paramMember) throws Exception {
-		int resultRow = 0;
-		
 		/*
 		// 드라이버 로딩
 		Class.forName("org.mariadb.jdbc.Driver");
 		// 드라이버 연결
 		Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook", "root", "wkqk1234");
-		*/
-		
+		*/		
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
+		// 쿼리문 작성
+		String insertSql = "INSERT INTO member(member_id, member_pw, member_name, updatedate, createdate) values(?, PASSWORD(?), ?, curdate(), curdate())";
+		// 쿼리 객체 생성
+		PreparedStatement insertStmt = conn.prepareStatement(insertSql);
+		// 쿼리 ?값 지정
+		insertStmt.setString(1, (String)paramMember.getMemberId());
+		insertStmt.setString(2, (String)paramMember.getMemberPw() );
+		insertStmt.setString(3, (String)paramMember.getMemberName());
 		
+		int row = insertStmt.executeUpdate();
 		
-		return resultRow;
+		if(row == 1) {
+			System.out.println("회원가입 성공");
+			insertStmt.close();
+			conn.close();
+			return 1;
+		} else {
+			System.out.println("회원가입 실패");
+			insertStmt.close();
+			conn.close();
+			return 0;
+		}	
+		
 	}
+	
+	// 회원정보 수정
+	public int updateMember(Member paramMember) throws Exception {
+		// 드라이버 로딩, 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		// 쿼리문 작성
+		String upSql = "UPDATE MEMBER SET member_name=? WHERE member_id=? AND member_pw=PASSWORD(?)";
+		// 쿼리 객체 생성
+		PreparedStatement upStmt = conn.prepareStatement(upSql);
+		// 쿼리문 ?값 지정
+		upStmt.setString(1, paramMember.getMemberName());
+		upStmt.setString(2, paramMember.getMemberId());
+		upStmt.setString(3, paramMember.getMemberPw());
+		// 쿼리 실행
+		int row = upStmt.executeUpdate();
+		
+		if(row == 1) {
+			upStmt.close();
+			conn.close();
+			return 1;
+		} else {
+			upStmt.close();
+			conn.close();
+			return 0;
+		}
+	}
+	
+	// 비밀번호 수정
+	
+		
+	
+	
+	
 	
 	
 	

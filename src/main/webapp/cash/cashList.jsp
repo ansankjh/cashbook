@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*"%>
 <%@ page import = "dao.*" %>
+<%@ page import = "vo.*" %>
 <%
 	// Controller : seesion, request
+	
+	Member loginMember = (Member)session.getAttribute("loginMember");
+	String msg = request.getParameter("msg");
 	// request 년 + 월
 	int year = 0;
 	int month = 0;
@@ -50,7 +54,8 @@
 	
 	// Model 호출 : 일별 cash 목록
 	CashDao cashDao = new CashDao();
-	ArrayList<HashMap<String, Object>> list = cashDao.selectCashListByMonth(year, month+1);
+	ArrayList<HashMap<String, Object>> list  = cashDao.selectCashListByMonth(loginMember.getMemberId(), year, month+1);
+
 	
 	// View : 달력출력 + 일별 cash 목록 출력
 %>
@@ -63,10 +68,11 @@
 <body>
 	<div>
 		<!-- 로그인 정보(세션 loginMember 변수) 출력 -->
-	</div>
-	
+	</div>	
 	<div>
+		<a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">&#8701;이전달</a>
 		<%=year%>년 <%=month+1%> 월
+		<a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month+1%>">다음달&#8702;</a>
 	</div>
 	<div>
 		<!-- 달력 -->
@@ -83,7 +89,30 @@
 							int date = i-beginBlank;
 							if(date > 0 && date <= lastDate) {
 				%>
-								<%=date%>
+								<div>
+ 									<a href="<%=request.getContextPath()%>/cashDateList.jsp?year=<%=year%>&month=<%=month+1%>&date=<%=date%>">									
+										<%=date%>
+									</a>
+								</div>
+								<div>
+									<% 
+										// substring(8) index가 8인 위치를 포함한 문자열을 리턴 ex) 2022-11-22 -> 22 리턴
+										// 그렇게 뽑아낸 cashDate의 날짜와 실제 달력의 날짜가 같으면 밑에 값 출력 
+										for(HashMap<String, Object> m : list) {
+											String cashDate = (String)(m.get("cashDate"));
+											if(Integer.parseInt(cashDate.substring(8)) == date) {
+									%>
+												[<%=(String)(m.get("categoryKind"))%>]
+												<%=(String)(m.get("categoryName"))%>
+												&nbsp;
+												<%=(Long)(m.get("cashPrice"))%>원
+												<br>
+												
+									<%
+											}
+										}
+									%>							
+								</div>
 				<%				
 							}
 				%>
@@ -99,22 +128,18 @@
 				%>
 			</tr>
 		</table>
-	</div>
-	<div>		
+	</div>	
+	<div>
+		<a href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a>
+		<a href="<%=request.getContextPath()%>/updateMemberForm.jsp">정보수정</a>
+		<a href="<%=request.getContextPath()%>/updateMemberPwForm.jsp">비밀번호수정</a>
 		<%
-			for(HashMap<String, Object> m : list) {
+			if(msg != null) {
 		%>
-				<!-- 과제 -->
-				<div><%=(Integer)(m.get("cashNo"))%></div>
-				<div><%=m.get("cashDate")%></div>
-				<div><%=(Integer)(m.get("cashPrice"))%></div>
-				<div><%=(Integer)(m.get("categoryNo"))%></div>
-				<div><%=m.get("categoryKind")%></div>
-				<div><%=m.get("categoryName")%></div>
-		
+				<%=msg%>
 		<%
 			}
-		%>	
+		%>
 	</div>
 </body>
 </html>

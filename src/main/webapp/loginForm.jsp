@@ -25,6 +25,9 @@
 		<div>
 			<button type="submit">로그인</button>
 		</div>
+		<div>
+			<a href="<%=request.getContextPath()%>/insertMemberForm.jsp">회원가입</a>
+		</div>
 	</form>
 </body>
 </html>
