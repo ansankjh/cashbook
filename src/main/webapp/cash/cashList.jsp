@@ -67,7 +67,8 @@
 </head>
 <body>
 	<div>
-		<!-- 로그인 정보(세션 loginMember 변수) 출력 -->
+		<%=loginMember.getMemberName()%>님 반갑습니다.
+		
 	</div>	
 	<div>
 		<a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">&#8701;이전달</a>
@@ -131,6 +132,13 @@
 	</div>	
 	<div>
 		<a href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a>
+		<%
+			if(loginMember.getMemberLevel() > 0){
+		%>
+				<a href="<%=request.getContextPath()%>/admin/adminMain.jsp">관리자 페이지</a>
+		<%
+			}
+		%>
 		<a href="<%=request.getContextPath()%>/updateMemberForm.jsp">정보수정</a>
 		<a href="<%=request.getContextPath()%>/updateMemberPwForm.jsp">비밀번호수정</a>
 		<%

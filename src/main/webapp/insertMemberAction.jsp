@@ -10,6 +10,13 @@
 	String memberPw2 = request.getParameter("memberPw2");
 	String memberName = request.getParameter("memberName");
 	
+	/* 
+	System.out.println(memberId);
+	System.out.println(memberPw);
+	System.out.println(memberPw2);
+	System.out.println(memberName);
+	*/
+	
 	// 회원가입에서 빈칸 있으면 나올 메시지
 	if(request.getParameter("memberId") == null || request.getParameter("memberPw") == null || request.getParameter("memberName") == null 
 		|| request.getParameter("memberId").equals("")	|| request.getParameter("memberPw").equals("") || request.getParameter("memberName").equals("")) {
@@ -32,18 +39,20 @@
 	insertMember.setMemberPw(memberPw);
 	insertMember.setMemberName(memberName);
 	
+	
 	// M
-	// insert쿼리문을 memberDao에 저장
+	// 쿼리문을 memberDao에 저장 (쿼리문 호출?)
 	MemberDao memberDao = new MemberDao();	
 	
 	// System.out.println(memberDao);
-	if(memberDao.memberCk(insertMember.getMemberId())) {
+	// memberDao.사용할메소드(입력값)
+	if(memberDao.memberCk(memberId)) {
 		String msg3 = URLEncoder.encode("아이디 중복", "utf-8");						
 		response.sendRedirect(request.getContextPath()+"/insertMemberForm.jsp?msg="+msg3);
 		return;
-	}
-	
-	int resultMember  = memberDao.insertMember(insertMember);
-	
-	response.sendRedirect(request.getContextPath()+"/loginForm.jsp");	
+	} else {
+		int row = memberDao.insertMember(insertMember);
+		String msg = URLEncoder.encode("회원가입완료", "utf-8");
+		response.sendRedirect(request.getContextPath()+"/loginForm.jsp?msg="+msg);
+	}		
 %>

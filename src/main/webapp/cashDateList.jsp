@@ -86,8 +86,8 @@
 					<td><%=m.get("categoryName")%></td>
 					<td><%=m.get("cashPrice")%></td>
 					<td><%=m.get("cashMemo")%></td>
-					<td><a href="">수정</a></td>
-					<td><a href="">삭제</a></td>
+					<td><a href="<%=request.getContextPath()%>/updateCashForm.jsp?year=<%=year%>&month<%=month+1%>&date=<%=date%>">수정</a></td>
+					<td><a href="<%=request.getContextPath()%>/deleteCashForm.jsp?year=<%=year%>&month<%=month%>&date=<%=date%>">삭제</a></td>
 				</tr>
 		<%
 			}

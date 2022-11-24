@@ -9,6 +9,7 @@
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	String memberId = loginMember.getMemberId();
 	String memberName = loginMember.getMemberName();
+	String msg = request.getParameter("msg");
 %>
 <!DOCTYPE html>
 <html>
@@ -18,8 +19,15 @@
 </head>
 <body>
 	<h1>비밀번호 수정</h1>
+	<%
+		if(msg != null) {
+	%>
+			<%=msg%>
+	<%
+		}
+	%>
 	<div>
-		<form action="<%=request.getContextPath()%>/updateMemberAction.jsp">
+		<form action="<%=request.getContextPath()%>/updateMemberPwAction.jsp">
 			<div>
 				<table>
 					<tr>
@@ -27,23 +35,17 @@
 						<td>
 							<input type="text" name="memberId" value="<%=memberId%>" readonly="readonly">
 						</td>
-					</tr>
+					</tr>					
 					<tr>
-						<td>닉네임</td>
+						<td>수정할 비밀번호</td>
 						<td>
-							<input type="text" name="memberName" value="<%=memberName%>" readonly="readonly">
+							<input type="password" name="memberPw2">
 						</td>
 					</tr>
 					<tr>
 						<td>기존 비밀번호</td>
 						<td>
 							<input type="password" name="memberPw">
-						</td>
-					</tr>
-					<tr>
-						<td>수정할 비밀번호</td>
-						<td>
-							<input type="password" name="memberPw2">
 						</td>
 					</tr>
 				</table>

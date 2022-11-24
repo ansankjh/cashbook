@@ -66,5 +66,8 @@
 			</div>
 		</form>
 	</div>
+	<div>
+		<a href="<%=request.getContextPath()%>/loginForm.jsp">뒤로</a>
+	</div>
 </body>
 </html>

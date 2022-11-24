@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -23,6 +24,35 @@ public class CashDao {
 	ORDER BY c.cash_date ASC;
 	 */
 	// 호출 : cashList.jsp
+	// updateCash
+	public ArrayList<HashMap<String, Object>> updateCash(String memberId, int year, int month) throws Exception {
+		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+		// 드라이버 로딩, 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		// 쿼리문 작성
+		String sql = "SELECT ct.category_kind categoryKind, ct.category_name categoryName"
+				+ " , c.cash_date cashDate, c.cash_price cashPrice, c.cash_memo cashMemo"
+				+ " FROM cash c INNER JOIN category ct ON c.category_no = ct.category_no"
+				+ " WHERE c.member_id = ? ORDER BY C.CASH_DATE ASC, ct.category_kind ASC";
+		// 쿼리 객체 생성
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		// 쿼리문 ?값 지정
+		stmt.setString(1, memberId);
+		// 쿼리 실행
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			HashMap<String, Object> m = new HashMap<String, Object>();
+			m.put("categoryKind", rs.getString("categoryKind"));
+			m.put("categoryName", rs.getString("categoryName"));
+			m.put("cashDate", rs.getString("cashDate"));
+			m.put("cashPrice", rs.getLong("cashPrice"));
+			m.put("categoryMemo", rs.getString("categoryMemo"));			
+			list.add(m);
+		}
+		dbUtil.close(rs, stmt, conn);
+		return list;
+	}
 	public ArrayList<HashMap<String, Object>> selectCashListByMonth(String memberId, int year, int month) throws Exception {
 		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
 		// 드라이버 로딩, 연결

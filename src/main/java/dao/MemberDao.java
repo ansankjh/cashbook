@@ -25,7 +25,7 @@ public class MemberDao {
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
 		// 쿼리문 작성
-		String loginSql = "SELECT member_id memberId, member_name memberName FROM MEMBER WHERE member_id=? AND member_pw=PASSWORD(?)";
+		String loginSql = "SELECT member_id memberId, member_level memberLevel, member_name memberName FROM MEMBER WHERE member_id=? AND member_pw=PASSWORD(?)";
 		// 쿼리 객체 생성
 		PreparedStatement loginStmt = conn.prepareStatement(loginSql);
 		// 쿼리문 ?값 지정
@@ -46,6 +46,7 @@ public class MemberDao {
 		return resultMember;
 	}
 	// 아이디 중복 방지
+	// 반환값 true:이미존재 false:사용가능
 	public Boolean memberCk(String memberId) throws Exception {
 		// 드라이버 로딩 , 연결
 		DBUtil dbUtil = new DBUtil();
@@ -64,17 +65,16 @@ public class MemberDao {
 			conn.close();
 			return true;
 		} else {
-			ckRs.close();
-			ckStmt.close();
-			conn.close();
-			return true;
-		}
-		
+			dbUtil.close(ckRs, ckStmt, conn);
+			return false;
+		}		
 	}
 	
 	
 	// 회원가입
+	// ()는 입력 받는 값
 	public int insertMember(Member paramMember) throws Exception {
+		int row = 0;
 		/*
 		// 드라이버 로딩
 		Class.forName("org.mariadb.jdbc.Driver");
@@ -84,28 +84,29 @@ public class MemberDao {
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
 		// 쿼리문 작성
-		String insertSql = "INSERT INTO member(member_id, member_pw, member_name, updatedate, createdate) values(?, PASSWORD(?), ?, curdate(), curdate())";
+		String insertSql = "INSERT INTO member(member_id, member_pw, member_name, updatedate, createdate) "
+				+ " VALUES(?, PASSWORD(?), ?, CURDATE(), CURDATE())";
 		// 쿼리 객체 생성
 		PreparedStatement insertStmt = conn.prepareStatement(insertSql);
 		// 쿼리 ?값 지정
-		insertStmt.setString(1, (String)paramMember.getMemberId());
-		insertStmt.setString(2, (String)paramMember.getMemberPw() );
-		insertStmt.setString(3, (String)paramMember.getMemberName());
+		insertStmt.setString(1, paramMember.getMemberId());
+		insertStmt.setString(2, paramMember.getMemberPw() );
+		insertStmt.setString(3, paramMember.getMemberName());
 		
-		int row = insertStmt.executeUpdate();
-		
+		 row = insertStmt.executeUpdate();
+		 
+		 return row;
+		/*
 		if(row == 1) {
 			System.out.println("회원가입 성공");
-			insertStmt.close();
-			conn.close();
+			dbUtil.close(null, insertStmt, conn);
 			return 1;
 		} else {
 			System.out.println("회원가입 실패");
-			insertStmt.close();
-			conn.close();
+			dbUtil.close(null, insertStmt, conn);
 			return 0;
 		}	
-		
+		*/
 	}
 	
 	// 회원정보 수정
@@ -137,7 +138,25 @@ public class MemberDao {
 	
 	// 비밀번호 수정
 	
+	public int pwUpMember(Member member) throws Exception {
+		int row = 0;
+		// 드라이버 로딩, 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		// 쿼리문
+		String sql = "UPDATE member SET member_pw = PASSWORD(?) WHERE member_id = ? AND member_pw = PASSWORD(?)";
+		// 쿼리 객체 생성
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		// 쿼리문 ?값 지정
+		stmt.setString(1, member.getMemberPw2());
+		stmt.setString(2, member.getMemberId());
+		stmt.setString(3, member.getMemberPw());
+		// 쿼리 실행
+		row = stmt.executeUpdate();
 		
+		return row;
+	}
+	
 	
 	
 	
