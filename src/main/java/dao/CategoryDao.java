@@ -13,7 +13,7 @@ public class CategoryDao {
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
 		// 조회 쿼리문 작성
-		String sql = "SELECT category_no categoryNo, category_kind categoryKind, category_name categoryName FROM category";				
+		String sql = "SELECT category_no categoryNo, category_kind categoryKind, category_name categoryName FROM category ORDER BY category_kind ASC";				
 		// 쿼리 객체 생성
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		// 쿼리 실행
