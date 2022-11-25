@@ -2,11 +2,38 @@ package dao;
 
 import vo.Member;
 
+import java.util.*;
+
 import java.sql.*;
 
 import util.*;
 
 public class MemberDao {
+	// 관리자 : 멤버레벨수정
+	public int updateMemberLevel(Member member) throws Exception {
+		return 0;
+	}
+	// 관리자페이지에서 보이는 멤버수
+	public int selectMemberCount() throws Exception {
+		return 0;
+	}
+	// 관리자가 멤버 리스트 띄울때 쓰는거
+	public ArrayList<Member> selectMemberListByPage(int beginRow, int rowPerPage) throws Exception {
+		/*
+		 OREDER BY createdate DESC
+		 */
+		return null;
+	}
+	// 관리자가 멤버 강퇴 시킬때 쓰는거 회원 넘버로 삭제
+	public int deleteMemberByAdmin(Member member) throws Exception {
+		
+		return 0;
+	}
+	// 회원 탈퇴 회원 넘버와 비밀번호로 삭제
+	public int deleteMember(Member member) throws Exception {
+		
+		return 0;
+	}
 	// 로그인
 	public Member login(Member paramMember) throws Exception {	
 
@@ -36,7 +63,8 @@ public class MemberDao {
 		if(loginRs.next( )) {
 			resultMember = new Member();
 			resultMember.setMemberId(loginRs.getString("memberId"));
-			resultMember.setMemberName(loginRs.getString("memberName"));			
+			resultMember.setMemberName(loginRs.getString("memberName"));
+			resultMember.setMemberLevel(loginRs.getInt("memberLevel"));
 		}
 		
 		

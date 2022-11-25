@@ -18,7 +18,7 @@
 	
 	String redirectUrl = "/loginForm.jsp";	
 	if(resultMember != null) {
-		// 로그인 성공시
+		// 로그인 성공시 Member타입의 loginMember에 resultMember를 저장한다
 		session.setAttribute("loginMember", resultMember); // session안에 로그인 ID와 이름이 저장
 		redirectUrl = "/cash/cashList.jsp";
 	}

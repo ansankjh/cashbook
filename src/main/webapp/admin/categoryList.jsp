@@ -2,13 +2,11 @@
 <%@ page import = "vo.*" %>
 <%
 	// Controller
-	Member loginMember = (Member)session.getAttribute("loginMember");
-
+	Member loginMember = (Member)session.getAttribute("login");
 	if(loginMember == null || loginMember.getMemberLevel() < 1) {
 		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
 		return;
 	}
-	System.out.println(loginMember);
 	// Model 호출
 	
 	// 최근공지 5개, 최근멤버 5명
@@ -28,7 +26,7 @@
 		<li><a href="<%=request.getContextPath()%>/admin/memberList.jsp">멤버관리(목록, 레벨수정, 강제탈퇴)</a></li>
 	</ul>
 	<div>
-		<!-- adminMain content -->
+		<!-- categoryList contents -->
 	</div>
 </body>
 </html>

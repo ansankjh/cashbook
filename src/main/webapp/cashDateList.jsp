@@ -3,14 +3,24 @@
 <%@ page import = "dao.*" %>
 <%@ page import = "vo.*" %>
 <%
-	// Controller
-	
-	
+	// Controller 세션 정보 가져오기
+	if(session.getAttribute("loginMember") == null) {
+		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
+		return;
+	}
+	// Map에 쓸 매개변수
 	Member loginMember = (Member)session.getAttribute("loginMember");
+	String loginMemberId = loginMember.getMemberId();
+	// 연 , 일 , 월 받기
 	int year = Integer.parseInt(request.getParameter("year"));
 	int month = Integer.parseInt(request.getParameter("month"));
 	int date = Integer.parseInt(request.getParameter("date"));
 	
+	/* 넘어오는지 확인
+	System.out.println(year);
+	System.out.println(month);
+	System.out.println(date);
+	*/
 	
 	// Model
 	CategoryDao categoryDao = new CategoryDao();
@@ -69,25 +79,31 @@
 		<button type="submit">입력</button>
 	</form>
 	<!--  cash 목록 출력 -->
+	<h1><%=year%>년 <%=month%>월 <%=date%>일</h1>
 	<table border="1">
 		<tr>
 			<th>categoryKind</th>
 			<th>categoryName</th>
 			<th>cashPrice</th>
 			<th>cashMemo</th>
-			<th>수정</th> <!-- @/cash/deleteCash.jsp?cashNo=를 넘겨준다 -->
-			<th>삭제</th> <!-- @/cash/updateCash.jsp?cashNo=를 넘겨준다 -->
+			<th>updateDate</th>
+			<th>createDate</th> 
+			<th>수정</th> <!-- @/cash/updateCash.jsp?cashNo=를 넘겨준다 --> <!-- @/cash/deleteCash.jsp?cashNo=를 넘겨준다 -->
+			<th>삭제</th>
 		</tr>
 		<%
 			for(HashMap<String, Object> m : list) {
+
 		%>
 				<tr>
 					<td><%=m.get("categoryKind")%></td>
 					<td><%=m.get("categoryName")%></td>
 					<td><%=m.get("cashPrice")%></td>
 					<td><%=m.get("cashMemo")%></td>
-					<td><a href="<%=request.getContextPath()%>/updateCashForm.jsp?year=<%=year%>&month<%=month+1%>&date=<%=date%>">수정</a></td>
-					<td><a href="<%=request.getContextPath()%>/deleteCashForm.jsp?year=<%=year%>&month<%=month%>&date=<%=date%>">삭제</a></td>
+					<td><%=m.get("updateDate")%></td>
+					<td><%=m.get("createDate")%></td>
+					<td><a href="<%=request.getContextPath()%>/updateCashForm.jsp?year=<%=year%>&month=<%=month%>&date=<%=date%>&cashNo=<%=m.get("cashNo")%>">수정</a></td>
+					<td><a href="<%=request.getContextPath()%>/deleteCashForm.jsp?year=<%=year%>&month=<%=month%>&date=<%=date%>">삭제</a></td>
 				</tr>
 		<%
 			}

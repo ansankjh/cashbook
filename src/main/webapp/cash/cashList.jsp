@@ -4,7 +4,10 @@
 <%@ page import = "vo.*" %>
 <%
 	// Controller : seesion, request
-	
+	if(session.getAttribute("loginMember") == null) {
+		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
+		return;
+	}
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	String msg = request.getParameter("msg");
 	// request 년 + 월
@@ -133,10 +136,10 @@
 	<div>
 		<a href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a>
 		<%
-			if(loginMember.getMemberLevel() > 0){
+			if(loginMember.getMemberLevel() > 0) {
 		%>
-				<a href="<%=request.getContextPath()%>/admin/adminMain.jsp">관리자 페이지</a>
-		<%
+				<a href="<%=request.getContextPath()%>/admin/adminMain.jsp">관리자페이지</a>
+		<%	
 			}
 		%>
 		<a href="<%=request.getContextPath()%>/updateMemberForm.jsp">정보수정</a>

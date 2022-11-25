@@ -1,15 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "vo.*" %>
+<%@ page import = "dao.*" %>
+<%@ page import = "java.util.*" %>
 <%
 	// Controller
-	Member loginMember = (Member)session.getAttribute("loginMember");
-
+	Member loginMember = (Member)session.getAttribute("login");
 	if(loginMember == null || loginMember.getMemberLevel() < 1) {
 		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
 		return;
 	}
-	System.out.println(loginMember);
-	// Model 호출
+	int currentPage = 0;
+	
+	int rowPerPage = 10;
+	
+	// Model : notice list
+	NoticeDao noticeDao = new NoticeDao();
+	ArrayList<Notice> list = noticeDao.selectNoticeListByPage(0, 0);
+	int noticeCount = noticeDao.selectNoticeCount(); // << lastPage 구하는데 씀
 	
 	// 최근공지 5개, 최근멤버 5명
 	
@@ -28,7 +35,26 @@
 		<li><a href="<%=request.getContextPath()%>/admin/memberList.jsp">멤버관리(목록, 레벨수정, 강제탈퇴)</a></li>
 	</ul>
 	<div>
-		<!-- adminMain content -->
+		<!-- noticeList contents -->
+		<h1>공지</h1>
+		<a href="">공지입력</a>
+		<table>
+			<tr>
+				<th>공지내용</th>
+				<th>공지날짜</th> <!-- createdate -->
+				<th>수정</th>
+				<th>삭제</th>
+			</tr>
+			<tr>
+				<%
+					for(Notice n : list) {
+				%>
+				
+				<%
+					}
+				%>
+			</tr>
+		</table>
 	</div>
 </body>
 </html>

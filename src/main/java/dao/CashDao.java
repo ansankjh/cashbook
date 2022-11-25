@@ -25,29 +25,28 @@ public class CashDao {
 	 */
 	// 호출 : cashList.jsp
 	// updateCash
-	public ArrayList<HashMap<String, Object>> updateCash(String memberId, int year, int month) throws Exception {
+	public ArrayList<HashMap<String, Object>> updateCash(String memberId, int cashNo) throws Exception {
 		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 		// 드라이버 로딩, 연결
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
 		// 쿼리문 작성
-		String sql = "SELECT ct.category_kind categoryKind, ct.category_name categoryName"
-				+ " , c.cash_date cashDate, c.cash_price cashPrice, c.cash_memo cashMemo"
+		String sql = "SELECT ct.category_name categoryName"
+				+ " , c.cash_price cashPrice"
+				+ " , c.cash_memo cashMemo"
 				+ " FROM cash c INNER JOIN category ct ON c.category_no = ct.category_no"
-				+ " WHERE c.member_id = ? ORDER BY C.CASH_DATE ASC, ct.category_kind ASC";
+				+ " WHERE cash_no = ?";
 		// 쿼리 객체 생성
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		// 쿼리문 ?값 지정
-		stmt.setString(1, memberId);
+		stmt.setInt(1, cashNo);
 		// 쿼리 실행
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()) {
 			HashMap<String, Object> m = new HashMap<String, Object>();
-			m.put("categoryKind", rs.getString("categoryKind"));
 			m.put("categoryName", rs.getString("categoryName"));
-			m.put("cashDate", rs.getString("cashDate"));
 			m.put("cashPrice", rs.getLong("cashPrice"));
-			m.put("categoryMemo", rs.getString("categoryMemo"));			
+			m.put("cashMemo", rs.getString("cashMemo"));			
 			list.add(m);
 		}
 		dbUtil.close(rs, stmt, conn);
@@ -66,6 +65,10 @@ public class CashDao {
 				+ "		, c.category_no categoryNo"
 				+ "		, ct.category_kind categoryKind"
 				+ "		, ct.category_name categoryName"
+				+ "		, c.cash_memo cashMemo"
+				+ "		, c.updatedate updateDate"
+				+ "		, c.createdate createDate"
+				+ "		, c.member_id memberId"
 				+ "	FROM cash c INNER JOIN category ct"
 				+ "	ON c.category_no = ct.category_no"
 				+ "	WHERE c.member_id = ? AND YEAR(c.cash_date) = ? AND MONTH(c.cash_date) = ?"
@@ -87,6 +90,10 @@ public class CashDao {
 			m.put("categoryNo", rs.getInt("categoryNo"));
 			m.put("categoryKind", rs.getString("categoryKind"));
 			m.put("categoryName", rs.getString("categoryName"));
+			m.put("cashMemo", rs.getString("cashMemo"));
+			m.put("updateDate", rs.getString("updateDate"));
+			m.put("createDate", rs.getString("createDate"));
+			m.put("memberId", rs.getString("memberId"));
 			list.add(m);
 		}
 		
@@ -110,6 +117,8 @@ public class CashDao {
 					+ "		, c.cash_memo cashMemo"
 					+ "		, ct.category_kind categoryKind"
 					+ "		, ct.category_name categoryName"
+					+ "		, c.updatedate updateDate"
+					+ "		, c.createdate createDate"
 					+ " FROM cash c INNER JOIN category ct"
 					+ " ON c.category_no = ct.category_no"
 					+ " WHERE c.member_id = ?"
@@ -138,6 +147,8 @@ public class CashDao {
 				m.put("cashMemo", rs.getString("cashMemo"));
 				m.put("categoryKind", rs.getString("categoryKind"));
 				m.put("categoryName", rs.getString("categoryName"));
+				m.put("updateDate",  rs.getString("updateDate"));
+				m.put("createDate",  rs.getString("createDate"));
 				list.add(m);
 			}
 			
