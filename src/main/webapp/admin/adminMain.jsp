@@ -32,7 +32,7 @@
 	int cnt = noticeDao.selectNoticeCount();
 	// System.out.println(cnt);
 	int lastPage = cnt / rowPerPage;
-		
+	// System.out.println(lastPage);	
 	// View
 %>
 <!DOCTYPE html>

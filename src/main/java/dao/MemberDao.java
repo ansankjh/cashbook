@@ -1,17 +1,59 @@
 package dao;
 
 import vo.Member;
+import vo.Notice;
 
 import java.util.*;
+
+import org.mariadb.jdbc.export.Prepare;
 
 import java.sql.*;
 
 import util.*;
 
 public class MemberDao {
+	// 관리자 : 멤서 수정할때 value값
+	public ArrayList<Member> selectMember(int memberNo) throws Exception {
+		ArrayList<Member> memberList = new ArrayList<Member>();
+		// 드라이버 로딩, 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		// 쿼리문 작성
+		String sql = "SELECT member_id memberId, member_level memberLevel FROM member WHERE member_no = ?";
+		// 쿼리 객체 생성
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		// 쿼리문 ?값 지정
+		stmt.setInt(1, memberNo);
+		// 쿼리 실행
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			Member m = new Member();
+			m.setMemberId(rs.getString("memberId"));
+			m.setMemberLevel(rs.getInt("memberLevel"));
+			memberList.add(m);
+		} 
+		dbUtil.close(rs, stmt, conn);
+		return memberList;
+	}
 	// 관리자 : 멤버레벨수정
 	public int updateMemberLevel(Member member) throws Exception {
-		return 0;
+		
+		// 드라이버 로딩, 수정
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		// 쿼리문 작성
+		String sql = "UPDATE member SET member_level = ? WHERE member_no = ? AND member_id = ?";
+		// 쿼리 객체 생성
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		// 쿼리문 ?값 지정
+		stmt.setInt(1, member.getMemberLevel());
+		stmt.setInt(2, member.getMemberNo());
+		stmt.setString(3, member.getMemberId());
+		// 쿼리 실행
+		int row = stmt.executeUpdate();
+		
+		return row;
+		
 	}
 	// 관리자페이지에서 보이는 멤버수
 	public int selectMemberCount() throws Exception {
@@ -39,15 +81,25 @@ public class MemberDao {
 		// 드라이버 로딩, 연결
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
+		/*
+		 SELECT member_no memberNo
+			, member_id memberId
+			, member_level memberLevel
+			, member_name memberName
+			, updatedate updateDate
+			, createdate createDate 
+			FROM member 
+			ORDER BY createdate
+			DESC LIMIT ?, ?;
+		 */
 		// 쿼리문 작성
 		String sql = "SELECT member_no memberNo"
-				+ "	, member_id memberId"
+				+ " , member_id memberId"
 				+ " , member_level memberLevel"
 				+ " , member_name memberName"
 				+ " , updatedate updateDate"
-				+ " , createdate createDate"
-				+ " FROM MEMBER ORDER BY createdate DESC"
-				+ " LIMIT ?, ?";
+				+ " , createdate createDate "
+				+ " FROM member ORDER BY member_no DESC LIMIT ?, ?";
 		// 쿼리 객체 생성
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		// 쿼리문 ?값 지정
@@ -55,7 +107,7 @@ public class MemberDao {
 		stmt.setInt(2, rowPerPage);
 		// 쿼리 실행
 		ResultSet rs = stmt.executeQuery();
-		if(rs.next()) {
+		while(rs.next()) {
 			Member m = new Member();
 			m.setMemberNo(rs.getInt("memberNo"));
 			m.setMemberId(rs.getString("memberId"));
@@ -69,8 +121,20 @@ public class MemberDao {
 	}
 	// 관리자가 멤버 강퇴 시킬때 쓰는거 회원 넘버로 삭제
 	public int deleteMemberByAdmin(Member member) throws Exception {
+		int row = 0;
+		// 드라이버 로딩, 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		// 쿼리문 작성
+		String sql = "DELETE FROM member WHERE member_no = ?";
+		// 쿼리 객체 생성
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		// 쿼리문 ?값 지정
+		stmt.setInt(1, member.getMemberNo());
+		// 쿼리 실행
+		row = stmt.executeUpdate();
 		
-		return 0;
+		return row;
 	}
 	
 	// 로그인
