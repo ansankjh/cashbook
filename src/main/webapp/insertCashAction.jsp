@@ -14,16 +14,8 @@
 	int month = Integer.parseInt(request.getParameter("month"));
 	int date = Integer.parseInt(request.getParameter("date"));
 	
-	// null이나 공백 들어오면 cashDateList.jsp로 돌아가게하기
-	if(request.getParameter("memberId") == null || request.getParameter("categoryNo") == null 
-		|| request.getParameter("cashDate") == null || request.getParameter("cashPrice") == null || request.getParameter("cashMemo") == null
-		|| request.getParameter("memberId").equals("") || request.getParameter("categoryNo").equals("") 
-		|| request.getParameter("cashDate").equals("") || request.getParameter("cashPrice").equals("") || request.getParameter("cashMemo").equals("")) {
-		
-		String msg = URLEncoder.encode("빈칸이 있습니다", "utf-8");						
-		response.sendRedirect(request.getContextPath()+"/cashDateList.jsp?msg="+msg);
-		return;
-	}
+	
+	// Model 불러올 매개값
 	Cash cash  = new Cash();
 	cash.setMemberId(memberId);
 	cash.setCategoryNo(categoryNo);

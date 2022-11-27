@@ -4,22 +4,28 @@
 <%@ page import = "java.util.*" %>
 <%
 	// Controller
-	Member loginMember = (Member)session.getAttribute("login");
+	Member loginMember = (Member)session.getAttribute("loginMember");
 	if(loginMember == null || loginMember.getMemberLevel() < 1) {
 		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
 		return;
 	}
-	int currentPage = 0;
+	String msg = request.getParameter("msg");
+	// 현재 페이지
+	int currentPage = 1;
+	if(request.getParameter("currentPage") != null) {
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	}
 	
 	int rowPerPage = 10;
+	int beginRow = (currentPage - 1) * rowPerPage;
 	
 	// Model : notice list
 	NoticeDao noticeDao = new NoticeDao();
-	ArrayList<Notice> list = noticeDao.selectNoticeListByPage(0, 0);
-	int noticeCount = noticeDao.selectNoticeCount(); // << lastPage 구하는데 씀
+	ArrayList<Notice> list = noticeDao.selectNoticeListByPage(beginRow, rowPerPage);
+	int cnt = noticeDao.selectNoticeCount(); // << lastPage 구하는데 씀
 	
-	// 최근공지 5개, 최근멤버 5명
-	
+	int lastPage = cnt / rowPerPage;
+		
 	// View
 %>
 <!DOCTYPE html>
@@ -30,31 +36,64 @@
 </head>
 <body>
 	<ul>
-		<li><a href="<%=request.getContextPath()%>/admin/noticeList.jsp">공지관리</a></li>
+		<li><a href="<%=request.getContextPath()%>/admin/adminMain.jsp">관리자페이지</a></li>
 		<li><a href="<%=request.getContextPath()%>/admin/categoryList.jsp">카테고리관리</a></li>
 		<li><a href="<%=request.getContextPath()%>/admin/memberList.jsp">멤버관리(목록, 레벨수정, 강제탈퇴)</a></li>
 	</ul>
 	<div>
 		<!-- noticeList contents -->
 		<h1>공지</h1>
-		<a href="">공지입력</a>
+		<%
+			if(msg != null) {
+		%>
+				<%=msg%>
+		<%
+			}
+		%>
+		<a href="<%=request.getContextPath()%>/insertNoticeForm.jsp">공지입력</a>
 		<table>
 			<tr>
 				<th>공지내용</th>
 				<th>공지날짜</th> <!-- createdate -->
 				<th>수정</th>
 				<th>삭제</th>
-			</tr>
-			<tr>
-				<%
-					for(Notice n : list) {
-				%>
-				
-				<%
-					}
-				%>
-			</tr>
+			</tr>			
+			<%
+				for(Notice n : list) {
+			%>
+					<tr>
+						<td><%=n.getNoticeMemo()%></td>
+						<td><%=n.getCreatedate()%></td>
+						<td>
+							<a href="<%=request.getContextPath()%>/updateNoticeForm.jsp?noticeNo=<%=n.getNoticeNo()%>">수정</a>
+						</td>
+						<td>
+							<a href="<%=request.getContextPath()%>/deleteNoticeAction.jsp?noticeNo=<%=n.getNoticeNo()%>">삭제</a>
+						</td>
+					</tr>
+			<%
+				}
+			%>			
 		</table>
+	</div>
+	<div>
+	<!-- 페이징 -->
+		<a href="<%=request.getContextPath()%>/admin/noticeList.jsp?currentPage=1">처음</a>
+		<%
+			if(currentPage > 1) {
+		%>
+			<a href="<%=request.getContextPath()%>/admin/noticeList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+		<%=currentPage%>
+		<%
+			}
+		
+			if(currentPage < lastPage) {
+		%>
+				<a href="<%=request.getContextPath()%>/admin/noticeList.jsp?currentPage=<%=currentPage+1%>">다음</a>
+		<%
+			}
+		%>
+		<a href="<%=request.getContextPath()%>/admin/noticeList.jsp?currentPage=<%=lastPage%>">마지막</a>
 	</div>
 </body>
 </html>

@@ -10,13 +10,13 @@
 	// System.out.println(memberPw);
 	Member paramMember = new Member(); // 모델 호출시 매개값
 	paramMember.setMemberId(memberId);
-	paramMember.setMemberPw(memberPw);
+	paramMember.setMemberPw(memberPw); 
 	
 	// M호출
 	MemberDao memberDao = new MemberDao();	
 	Member resultMember  = memberDao.login(paramMember);
 	
-	String redirectUrl = "/loginForm.jsp";	
+	String redirectUrl = "/loginForm.jsp?";	
 	if(resultMember != null) {
 		// 로그인 성공시 Member타입의 loginMember에 resultMember를 저장한다
 		session.setAttribute("loginMember", resultMember); // session안에 로그인 ID와 이름이 저장

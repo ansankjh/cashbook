@@ -3,17 +3,20 @@
 <%@ page import = "dao.*" %>
 <%@ page import = "vo.*" %>
 <%
-	// Controller : seesion, request
+	// Controller
+	// 비로그인시 접근불가
 	if(session.getAttribute("loginMember") == null) {
 		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
 		return;
 	}
+	// 세션 정보 불러오기
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	String msg = request.getParameter("msg");
 	// request 년 + 월
 	int year = 0;
 	int month = 0;
 	
+	// 년,월에 null이 들어오면 오늘 날짜 저장
 	if((request.getParameter("year") == null) || request.getParameter("month") == null) {
 		Calendar today = Calendar.getInstance(); // 오늘날짜
 		year = today.get(Calendar.YEAR);
@@ -64,93 +67,92 @@
 %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>cashList</title>
-</head>
-<body>
-	<div>
-		<%=loginMember.getMemberName()%>님 반갑습니다.
-		
-	</div>	
-	<div>
-		<a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">&#8701;이전달</a>
-		<%=year%>년 <%=month+1%> 월
-		<a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month+1%>">다음달&#8702;</a>
-	</div>
-	<div>
-		<!-- 달력 -->
-		<table border="1">
-			<tr>
-				<th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th>
-			</tr>
-			<tr>
-				<%
-					for(int i=1; i<=totalTd; i++) {
-				%>
-						<td>
-				<%
-							int date = i-beginBlank;
-							if(date > 0 && date <= lastDate) {
-				%>
-								<div>
- 									<a href="<%=request.getContextPath()%>/cashDateList.jsp?year=<%=year%>&month=<%=month+1%>&date=<%=date%>">									
-										<%=date%>
-									</a>
-								</div>
-								<div>
-									<% 
-										// substring(8) index가 8인 위치를 포함한 문자열을 리턴 ex) 2022-11-22 -> 22 리턴
-										// 그렇게 뽑아낸 cashDate의 날짜와 실제 달력의 날짜가 같으면 밑에 값 출력 
-										for(HashMap<String, Object> m : list) {
-											String cashDate = (String)(m.get("cashDate"));
-											if(Integer.parseInt(cashDate.substring(8)) == date) {
-									%>
-												[<%=(String)(m.get("categoryKind"))%>]
-												<%=(String)(m.get("categoryName"))%>
-												&nbsp;
-												<%=(Long)(m.get("cashPrice"))%>원
-												<br>
-												
-									<%
+	<head>
+		<meta charset="UTF-8">
+		<title>cashList</title>
+	</head>
+	<body>
+		<div>
+			<%=loginMember.getMemberName()%>님 반갑습니다.		
+		</div>	
+		<div>
+			<a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">&#8701;이전달</a>
+			<%=year%>년 <%=month+1%> 월
+			<a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month+1%>">다음달&#8702;</a>
+		</div>
+		<div>
+			<!-- 달력 -->
+			<table border="1">
+				<tr>
+					<th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th>
+				</tr>
+				<tr>
+					<%
+						for(int i=1; i<=totalTd; i++) {
+					%>
+							<td>
+					<%
+								int date = i-beginBlank;
+								if(date > 0 && date <= lastDate) {
+					%>
+									<div>
+	 									<a href="<%=request.getContextPath()%>/cashDateList.jsp?year=<%=year%>&month=<%=month+1%>&date=<%=date%>">									
+											<%=date%>
+										</a>
+									</div>
+									<div>
+										<% 
+											// substring(8) index가 8인 위치를 포함한 문자열을 리턴 ex) 2022-11-22 -> 22 리턴
+											// 그렇게 뽑아낸 cashDate의 날짜와 실제 달력의 날짜가 같으면 밑에 값 출력 
+											for(HashMap<String, Object> m : list) {
+												String cashDate = (String)(m.get("cashDate"));
+												if(Integer.parseInt(cashDate.substring(8)) == date) {
+										%>
+													[<%=(String)(m.get("categoryKind"))%>]
+													<%=(String)(m.get("categoryName"))%>
+													&nbsp;
+													<%=(Long)(m.get("cashPrice"))%>원
+													<br>												
+										<%
+												}
 											}
-										}
-									%>							
-								</div>
-				<%				
+										%>							
+									</div>
+					<%				
+								}
+					%>
+							</td>
+					<%
+							
+							if(i%7 == 0 && i != totalTd) {
+					%>
+								</tr><tr> <!-- td7개 만들고 테이블 줄바꿈 -->
+					<%			
 							}
-				%>
-						</td>
-				<%
-						
-						if(i%7 == 0 && i != totalTd) {
-				%>
-							</tr><tr> <!-- td7개 만들고 테이블 줄바꿈 -->
-				<%			
 						}
-					}
-				%>
-			</tr>
-		</table>
-	</div>	
-	<div>
-		<a href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a>
-		<%
-			if(loginMember.getMemberLevel() > 0) {
-		%>
-				<a href="<%=request.getContextPath()%>/admin/adminMain.jsp">관리자페이지</a>
-		<%	
-			}
-		%>
-		<a href="<%=request.getContextPath()%>/updateMemberForm.jsp">정보수정</a>
-		<a href="<%=request.getContextPath()%>/updateMemberPwForm.jsp">비밀번호수정</a>
-		<%
-			if(msg != null) {
-		%>
-				<%=msg%>
-		<%
-			}
-		%>
-	</div>
-</body>
+					%>
+				</tr>
+			</table>
+		</div>	
+		<div>
+			<a href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a>
+			<%
+				if(loginMember.getMemberLevel() > 0) {
+			%>
+					<a href="<%=request.getContextPath()%>/admin/adminMain.jsp">관리자페이지</a>
+			<%	
+				}
+			%>
+			<a href="<%=request.getContextPath()%>/updateMemberForm.jsp">정보수정</a>
+			<a href="<%=request.getContextPath()%>/updateMemberPwForm.jsp">비밀번호수정</a>
+			<a href="<%=request.getContextPath()%>/deleteMemberForm.jsp">회원탈퇴</a>
+			<%
+				if(msg != null) {
+			%>
+					<%=msg%>
+			<%
+				}
+			%>
+		</div>
+	</body>
 </html>

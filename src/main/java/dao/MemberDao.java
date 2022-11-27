@@ -15,25 +15,64 @@ public class MemberDao {
 	}
 	// 관리자페이지에서 보이는 멤버수
 	public int selectMemberCount() throws Exception {
-		return 0;
+		int cnt = 0;
+		// 드라이버 로딩 ,연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		// 쿼리문 작성
+		String sql = "SELECT COUNT(*) FROM MEMBER";
+		// 쿼리 객체 생성
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		// 쿼리 실행
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			cnt = rs.getInt("COUNT(*)");
+		}
+		return cnt;
 	}
 	// 관리자가 멤버 리스트 띄울때 쓰는거
 	public ArrayList<Member> selectMemberListByPage(int beginRow, int rowPerPage) throws Exception {
+		ArrayList<Member> memberList = new ArrayList<Member>();
 		/*
 		 OREDER BY createdate DESC
 		 */
-		return null;
+		// 드라이버 로딩, 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		// 쿼리문 작성
+		String sql = "SELECT member_no memberNo"
+				+ "	, member_id memberId"
+				+ " , member_level memberLevel"
+				+ " , member_name memberName"
+				+ " , updatedate updateDate"
+				+ " , createdate createDate"
+				+ " FROM MEMBER ORDER BY createdate DESC"
+				+ " LIMIT ?, ?";
+		// 쿼리 객체 생성
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		// 쿼리문 ?값 지정
+		stmt.setInt(1, beginRow);
+		stmt.setInt(2, rowPerPage);
+		// 쿼리 실행
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			Member m = new Member();
+			m.setMemberNo(rs.getInt("memberNo"));
+			m.setMemberId(rs.getString("memberId"));
+			m.setMemberLevel(rs.getInt("memberLevel"));
+			m.setMemberName(rs.getString("memberName"));
+			m.setUpdatedate(rs.getString("updateDate"));
+			m.setCreatedate(rs.getString("createDate"));
+			memberList.add(m);
+		}
+		return memberList;
 	}
 	// 관리자가 멤버 강퇴 시킬때 쓰는거 회원 넘버로 삭제
 	public int deleteMemberByAdmin(Member member) throws Exception {
 		
 		return 0;
 	}
-	// 회원 탈퇴 회원 넘버와 비밀번호로 삭제
-	public int deleteMember(Member member) throws Exception {
-		
-		return 0;
-	}
+	
 	// 로그인
 	public Member login(Member paramMember) throws Exception {	
 
@@ -98,6 +137,28 @@ public class MemberDao {
 		}		
 	}
 	
+	// 비번 중복 방지
+	public Boolean memberPwCk(String memberPw2) throws Exception {
+		// 드라이버 로딩, 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		// 쿼리문 작성
+		String sql = "SELECT member_pw FROM MEMBER WHERE member_pw = PASSWORD(?)";
+		// 쿼리객체 생성
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		// 쿼리문 ?값 지정
+		stmt.setString(1, memberPw2);
+		// 쿼리 실행
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next( )) {
+			dbUtil.close(rs, stmt, conn);
+			return true;
+		} else {
+			dbUtil.close(rs, stmt, conn);
+			return false;
+		}
+	}
+	
 	
 	// 회원가입
 	// ()는 입력 받는 값
@@ -123,6 +184,7 @@ public class MemberDao {
 		
 		 row = insertStmt.executeUpdate();
 		 
+		 dbUtil.close(null, insertStmt, conn);
 		 return row;
 		/*
 		if(row == 1) {
@@ -182,15 +244,32 @@ public class MemberDao {
 		// 쿼리 실행
 		row = stmt.executeUpdate();
 		
+		dbUtil.close(null, stmt, conn);
 		return row;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	// 회원탈퇴	
+	public int deleteMember(Member member) throws Exception {
+		// 드라이버 로딩, 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		// 쿼리문 작성
+		String sql = "DELETE FROM MEMBER WHERE member_id=? AND member_pw= PASSWORD(?)";
+		// 쿼리객체 생성
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		// 쿼리문 ?값 지정
+		stmt.setString(1, member.getMemberId());
+		stmt.setString(2, member.getMemberPw());
+		// 쿼리문 실행
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			System.out.println("회원탈퇴 완료");
+			dbUtil.close(null, stmt, conn);
+			return 1;
+		} else {
+			System.out.println("회원탈퇴 실패");
+			dbUtil.close(null, stmt, conn);
+			return 0;
+		}
+	}
 }

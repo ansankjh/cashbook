@@ -25,7 +25,7 @@ public class CashDao {
 	 */
 	// 호출 : cashList.jsp
 	// updateCash
-	public ArrayList<HashMap<String, Object>> updateCash(String memberId, int cashNo) throws Exception {
+	public ArrayList<HashMap<String, Object>> selectCash(String memberId, int cashNo) throws Exception {
 		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 		// 드라이버 로딩, 연결
 		DBUtil dbUtil = new DBUtil();
@@ -117,8 +117,6 @@ public class CashDao {
 					+ "		, c.cash_memo cashMemo"
 					+ "		, ct.category_kind categoryKind"
 					+ "		, ct.category_name categoryName"
-					+ "		, c.updatedate updateDate"
-					+ "		, c.createdate createDate"
 					+ " FROM cash c INNER JOIN category ct"
 					+ " ON c.category_no = ct.category_no"
 					+ " WHERE c.member_id = ?"
@@ -146,9 +144,7 @@ public class CashDao {
 				m.put("cashPrice", rs.getLong("cashPrice"));
 				m.put("cashMemo", rs.getString("cashMemo"));
 				m.put("categoryKind", rs.getString("categoryKind"));
-				m.put("categoryName", rs.getString("categoryName"));
-				m.put("updateDate",  rs.getString("updateDate"));
-				m.put("createDate",  rs.getString("createDate"));
+				m.put("categoryName", rs.getString("categoryName"));		
 				list.add(m);
 			}
 			
@@ -157,6 +153,7 @@ public class CashDao {
 			conn.close();
 			return list;
 		}
+		
 	// insertCashAction
 	public int insertCash(Cash paramCash) throws Exception {
 		// 드라이버 로딩, 연결
@@ -183,8 +180,50 @@ public class CashDao {
 			insertStmt.close();
 			conn.close();
 			return 0;
-		}
-			
-		
+		}		
 	}
+	
+	// cash 업데이트
+	public int updateCash(Cash cash) throws Exception {
+		int row = 0;
+		// 드라이버 로딩 , 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		// 쿼리문 작성
+		String sql = "UPDATE CASH SET category_no=?, cash_price=?, cash_memo=? WHERE cash_no=? AND member_id=?";
+			
+		// 쿼리 객체 생성
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		// 쿼리문 ?값 지정
+		stmt.setInt(1, cash.getCategoryNo());
+		stmt.setLong(2, cash.getCashPrice());
+		stmt.setString(3, cash.getCashMemo());
+		stmt.setInt(4, cash.getCashNo());
+		stmt.setString(5, cash.getMemberId());
+		// 쿼리 실행
+		row  = stmt.executeUpdate();
+		
+		dbUtil.close(null, stmt, conn);
+		return row;
+	}
+	
+	// cash삭제
+	public int deleteCash(Cash cash) throws Exception {
+		int row = 0;
+		// 드라이버 로딩, 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		// 쿼리문 작성
+		String sql = "DELETE FROM cash WHERE cash_no = ? AND member_id = ?";
+		// 쿼리 객체 생성
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		// 쿼리문 ?값 지정
+		stmt.setInt(1, cash.getCashNo());
+		stmt.setString(2, cash.getMemberId());
+		// 쿼리 실행
+		row = stmt.executeUpdate();
+		
+		dbUtil.close(null, stmt, conn);
+		return row;		
+	}	
 }

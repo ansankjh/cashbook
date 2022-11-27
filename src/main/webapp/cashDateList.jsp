@@ -15,6 +15,7 @@
 	int year = Integer.parseInt(request.getParameter("year"));
 	int month = Integer.parseInt(request.getParameter("month"));
 	int date = Integer.parseInt(request.getParameter("date"));
+	String msg = request.getParameter("msg");
 	
 	/* 넘어오는지 확인
 	System.out.println(year);
@@ -85,9 +86,7 @@
 			<th>categoryKind</th>
 			<th>categoryName</th>
 			<th>cashPrice</th>
-			<th>cashMemo</th>
-			<th>updateDate</th>
-			<th>createDate</th> 
+			<th>cashMemo</th>		
 			<th>수정</th> <!-- @/cash/updateCash.jsp?cashNo=를 넘겨준다 --> <!-- @/cash/deleteCash.jsp?cashNo=를 넘겨준다 -->
 			<th>삭제</th>
 		</tr>
@@ -99,15 +98,20 @@
 					<td><%=m.get("categoryKind")%></td>
 					<td><%=m.get("categoryName")%></td>
 					<td><%=m.get("cashPrice")%></td>
-					<td><%=m.get("cashMemo")%></td>
-					<td><%=m.get("updateDate")%></td>
-					<td><%=m.get("createDate")%></td>
+					<td><%=m.get("cashMemo")%></td>					
 					<td><a href="<%=request.getContextPath()%>/updateCashForm.jsp?year=<%=year%>&month=<%=month%>&date=<%=date%>&cashNo=<%=m.get("cashNo")%>">수정</a></td>
-					<td><a href="<%=request.getContextPath()%>/deleteCashForm.jsp?year=<%=year%>&month=<%=month%>&date=<%=date%>">삭제</a></td>
+					<td><a href="<%=request.getContextPath()%>/deleteCashAction.jsp?year=<%=year%>&month=<%=month%>&date=<%=date%>&cashNo=<%=m.get("cashNo")%>">삭제</a></td>
 				</tr>
 		<%
 			}
 		%>
 	</table>
+	<%
+		if(msg != null) {
+	%>
+			<%=msg%>
+	<%
+		}
+	%>
 </body>
 </html>

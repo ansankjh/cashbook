@@ -53,7 +53,7 @@
 					if(currentPage > 1) {
 				%>
 						<a href="<%=request.getContextPath()%>/loginForm.jsp?currentPage=<%=currentPage-1%>">이전</a>
-					<%=currentPage%>
+				<%=currentPage%>
 				<%	
 					}
 					
