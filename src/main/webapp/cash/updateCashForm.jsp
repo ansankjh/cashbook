@@ -45,7 +45,7 @@
 	<body>
 		<h1>Cash 수정</h1>
 		<div>
-			<form action="<%=request.getContextPath()%>/updateCashAction.jsp">
+			<form action="<%=request.getContextPath()%>/cash/updateCashAction.jsp">
 				<input type="hidden" name="memberId" value="<%=loginMember.getMemberId()%>">
 				<input type="hidden" name="cashNo" value=<%=cashNo%>>
 				<input type="hidden" name="year" value="<%=year%>">

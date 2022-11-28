@@ -43,7 +43,7 @@
 		<jsp:include page="/inc/menu.jsp"></jsp:include>
 	</div>	
 	<!-- cash 입력 폼 -->
-	<form action="<%=request.getContextPath()%>/insertCashAction.jsp" method="post">
+	<form action="<%=request.getContextPath()%>/cash/insertCashAction.jsp" method="post">
 		<input type="hidden" name="memberId" value="<%=loginMember.getMemberId()%>">
 		<input type="hidden" name="year" value="<%=year%>">
 		<input type="hidden" name="month" value="<%=month%>">
@@ -102,8 +102,8 @@
 					<td><%=m.get("categoryName")%></td>
 					<td><%=m.get("cashPrice")%></td>
 					<td><%=m.get("cashMemo")%></td>					
-					<td><a href="<%=request.getContextPath()%>/updateCashForm.jsp?year=<%=year%>&month=<%=month%>&date=<%=date%>&cashNo=<%=m.get("cashNo")%>">수정</a></td>
-					<td><a href="<%=request.getContextPath()%>/deleteCashAction.jsp?year=<%=year%>&month=<%=month%>&date=<%=date%>&cashNo=<%=m.get("cashNo")%>">삭제</a></td>
+					<td><a href="<%=request.getContextPath()%>/cash/updateCashForm.jsp?year=<%=year%>&month=<%=month%>&date=<%=date%>&cashNo=<%=m.get("cashNo")%>">수정</a></td>
+					<td><a href="<%=request.getContextPath()%>/cash/deleteCashAction.jsp?year=<%=year%>&month=<%=month%>&date=<%=date%>&cashNo=<%=m.get("cashNo")%>">삭제</a></td>
 				</tr>
 		<%
 			}
