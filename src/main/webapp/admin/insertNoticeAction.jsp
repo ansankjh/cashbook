@@ -9,7 +9,7 @@
 	// 공지입력이 null이나 공백이면 표시할 메시지
 	if(request.getParameter("noticeMemo") == null || request.getParameter("noticeMemo").equals("")) {
 		String msg = URLEncoder.encode("공지내용을 입력해주세요.", "utf-8");
-		response.sendRedirect(request.getContextPath()+"/insertNoticeForm.jsp?msg="+msg);
+		response.sendRedirect(request.getContextPath()+"/admin/insertNoticeForm.jsp?msg="+msg);
 		return;
 	}
 	
@@ -24,6 +24,5 @@
 	if(row == 1) {
 		String msg = URLEncoder.encode("공지입력", "utf-8");
 		response.sendRedirect(request.getContextPath()+"/admin/noticeList.jsp?msg="+msg);
-		return;
 	}
 %>

@@ -11,7 +11,8 @@
 	// null이나 공백 들어오는걸 방지
 	if(request.getParameter("noticeNo") == null || request.getParameter("noticeMemo") == null
 		|| request.getParameter("noticeNo").equals("") || request.getParameter("noticeMemo").equals("")) {
-		response.sendRedirect(request.getContextPath()+"/updateNoticeForm.jsp");
+		String msg = URLEncoder.encode("내용을 입력해주세요.","utf-8");
+		response.sendRedirect(request.getContextPath()+"/admin/updateNoticeForm.jsp?noticeNo="+noticeNo+"&msg="+msg);
 		return;
 	}
 		

@@ -82,6 +82,7 @@ public class NoticeDao {
 		}
 		return count;
 	}
+	
 	// loginForm공지목록
 	public ArrayList<Notice> selectNoticeListByPage(int beginRow, int rowPerPage) throws Exception {
 		ArrayList<Notice> list = new ArrayList<Notice>();

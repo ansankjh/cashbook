@@ -26,7 +26,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
+		<title>updateMemberLevelForm</title>
 	</head>
 	<body>
 		<h1>회원등급수정</h1>

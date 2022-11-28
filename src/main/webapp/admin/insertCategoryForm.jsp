@@ -9,15 +9,23 @@
 		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
 		return;
 	}
+	String msg = request.getParameter("msg");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>insertCategoryForm</title>
 </head>
 <body>
 	<h1>카테고리추가</h1>
+	<%
+		if(msg != null) {
+	%>
+			<%=msg%>
+	<%
+		}
+	%>
 	<div>
 		<form action="<%=request.getContextPath()%>/admin/insertCategoryAction.jsp" method="post">
 			<div>	

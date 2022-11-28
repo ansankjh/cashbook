@@ -10,7 +10,8 @@
 	
 	if(request.getParameter("categoryKind") == null || request.getParameter("categoryName") == null
 		|| request.getParameter("categoryKind").equals("") || request.getParameter("categoryName").equals("")) {
-		response.sendRedirect(request.getContextPath()+"/admin/insertCategoryForm.jsp");
+		String msg = URLEncoder.encode("내용을 입력해주세요.", "utf-8");
+		response.sendRedirect(request.getContextPath()+"/admin/insertCategoryForm.jsp?msg="+msg);
 		return;
 	}
 	// 모델 호출할 매개값

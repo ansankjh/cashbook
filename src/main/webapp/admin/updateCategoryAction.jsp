@@ -10,7 +10,8 @@
 	
 	if(request.getParameter("categoryNo") == null || request.getParameter("categoryName") == null
 		|| request.getParameter("categoryNo").equals("") || request.getParameter("categoryName").equals("")) {
-		response.sendRedirect(request.getContextPath()+"/admin/updateCateogryForm.jsp");
+		String msg = URLEncoder.encode("내용을 입력해주세요.", "utf-8");
+		response.sendRedirect(request.getContextPath()+"/admin/updateCategoryForm.jsp?msg="+msg+"&categoryNo="+categoryNo);
 		return;
 	}
 	// System.out.println(categoryNo);

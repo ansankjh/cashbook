@@ -114,9 +114,7 @@ public class CategoryDao {
 		
 		dbUtil.close(null, stmt, conn);
 		return row;
-	}
-	
-	
+	}	
 	
 	// admin로그인 -> 카레고리관리 -> 카테고리목록
 	public ArrayList<Category> selectCategoryListByAdmin() throws Exception {
@@ -179,19 +177,5 @@ public class CategoryDao {
 		
 		dbUtil.close(rs, stmt, conn);
 		return categoryList;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 }

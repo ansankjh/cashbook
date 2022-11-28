@@ -8,6 +8,7 @@
 		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
 		return;
 	}
+	String msg = request.getParameter("msg");
 %>
 <!DOCTYPE html>
 <html>
@@ -17,6 +18,13 @@
 	</head>
 	<body>
 		<h1>공지입력</h1>
+		<%
+			if(msg != null) {
+		%>
+				<%=msg%>
+		<%
+			}
+		%>
 		<div>
 			<form action="<%=request.getContextPath()%>/admin/insertNoticeAction.jsp" method="post">
 				<div>

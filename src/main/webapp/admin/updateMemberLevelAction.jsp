@@ -8,12 +8,7 @@
 	int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 	String memberId = request.getParameter("memberId");
 	int memberLevel = Integer.parseInt(request.getParameter("memberLevel"));
-	
-	/*
-	System.out.println(memberNo);
-	System.out.println(memberLevel);
-	System.out.println(memberPw);
-	*/
+
 	// 모델 호출 매개값
 	Member member = new Member();
 	member.setMemberNo(memberNo);

@@ -176,6 +176,7 @@ public class MemberDao {
 		conn.close(); // 반납		
 		return resultMember;
 	}
+	
 	// 아이디 중복 방지
 	// 반환값 true:이미존재 false:사용가능
 	public Boolean memberCk(String memberId) throws Exception {
