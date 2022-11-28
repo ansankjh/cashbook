@@ -36,7 +36,7 @@
 			}
 		%>
 		<div>
-			<form action="<%=request.getContextPath()%>/updateNoticeAction.jsp" method="post">
+			<form action="<%=request.getContextPath()%>/admin/updateNoticeAction.jsp" method="post">
 				<input type="hidden" name="noticeNo" value="<%=noticeNo%>">
 				<div>
 					<table>

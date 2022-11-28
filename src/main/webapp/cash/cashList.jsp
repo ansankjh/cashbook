@@ -71,7 +71,7 @@
 		<meta charset="UTF-8">
 		<title>cashList</title>
 	</head>
-	<body>
+	<body>		
 		<div>
 			<%=loginMember.getMemberName()%>님 반갑습니다.		
 		</div>	

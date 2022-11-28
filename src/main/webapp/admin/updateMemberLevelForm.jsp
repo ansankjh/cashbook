@@ -38,7 +38,7 @@
 			}
 		%>
 		<div>
-			<form action="<%=request.getContextPath()%>/updateMemberLevelAction.jsp" method="post">
+			<form action="<%=request.getContextPath()%>/admin/updateMemberLevelAction.jsp" method="post">
 				<input type="hidden" name="memberNo" value="<%=memberNo%>">
 				<div>
 					<table>						

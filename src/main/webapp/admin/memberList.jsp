@@ -40,11 +40,9 @@
 		<title>memberList</title>
 	</head>
 	<body>
-		<ul>
-			<li><a href="<%=request.getContextPath()%>/admin/adminMain.jsp">관리자페이지</a></li>
-			<li><a href="<%=request.getContextPath()%>/admin/noticeList.jsp">공지관리</a></li>
-			<li><a href="<%=request.getContextPath()%>/admin/categoryList.jsp">카테고리관리</a></li>
-		</ul>
+		<div>
+			<jsp:include page="/inc/menu.jsp"></jsp:include>
+		</div>	
 		<div>
 			<!-- memberList contents -->
 			<!-- 여기서는 오로지 멤버 탈퇴시키는거랑 멤버 레벨수정 있음 인서트는 없음 -->
@@ -77,8 +75,8 @@
 							<td><%=m.getMemberName()%></td>
 							<td><%=m.getUpdatedate()%></td>
 							<td><%=m.getCreatedate()%></td>
-							<td><a href="<%=request.getContextPath()%>/updateMemberLevelForm.jsp?memberNo=<%=m.getMemberNo()%>">레벨수정</a></td>
-							<td><a href="<%=request.getContextPath()%>/adminDeleteMemberAction.jsp?memberNo=<%=m.getMemberNo()%>">회원강퇴</a></td>
+							<td><a href="<%=request.getContextPath()%>/admin/updateMemberLevelForm.jsp?memberNo=<%=m.getMemberNo()%>">레벨수정</a></td>
+							<td><a href="<%=request.getContextPath()%>/admin/adminDeleteMemberAction.jsp?memberNo=<%=m.getMemberNo()%>">회원강퇴</a></td>
 						</tr>
 				<%
 					}
@@ -86,7 +84,7 @@
 				
 			</table>
 		</div>
-		<div>
+		<div>			
 			<%
 				if(currentPage > 1) {
 			%>
