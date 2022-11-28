@@ -48,7 +48,7 @@
 		<%
 			}
 		%>
-		<a href="<%=request.getContextPath()%>/insertNoticeForm.jsp">공지입력</a>
+		<a href="<%=request.getContextPath()%>/admin/insertNoticeForm.jsp">공지입력</a>
 		<table>
 			<tr>
 				<th>공지내용</th>

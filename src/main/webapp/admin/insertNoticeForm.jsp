@@ -18,7 +18,7 @@
 	<body>
 		<h1>공지입력</h1>
 		<div>
-			<form action="<%=request.getContextPath()%>/insertNoticeAction.jsp" method="post">
+			<form action="<%=request.getContextPath()%>/admin/insertNoticeAction.jsp" method="post">
 				<div>
 					<table>
 						<tr>
