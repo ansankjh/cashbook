@@ -73,7 +73,7 @@
 	</head>
 	<body>		
 		<div>
-			<%=loginMember.getMemberName()%>님 반갑습니다.		
+			<%=loginMember.getMemberName()%>님 반갑습니다.<a href="<%=request.getContextPath()%>/logout.jsp">[로그아웃]</a>	
 		</div>	
 		<div>
 			<a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">&#8701;이전달</a>
@@ -134,13 +134,18 @@
 				</tr>
 			</table>
 		</div>	
-		<div>
-			<a href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a>
+		<div>			
 			<%
 				if(loginMember.getMemberLevel() > 0) {
 			%>
 					<a href="<%=request.getContextPath()%>/admin/adminMain.jsp">관리자페이지</a>
 			<%	
+				}
+			
+				if(loginMember.getMemberLevel() < 1) {
+			%>
+					<a href="<%=request.getContextPath()%>/help/helpList.jsp">고객센터</a>
+			<%
 				}
 			%>
 			<a href="<%=request.getContextPath()%>/updateMemberForm.jsp">정보수정</a>

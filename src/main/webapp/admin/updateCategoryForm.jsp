@@ -6,9 +6,6 @@
 	String msg = request.getParameter("msg");
 	// System.out.println(categoryNo);
 	
-	Category category  = new Category();
-	category.setCategoryNo(categoryNo);
-	
 	// Model
 	CategoryDao categoryDao = new CategoryDao();
 	Category ct = categoryDao.selectCategory(categoryNo);
