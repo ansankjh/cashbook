@@ -47,7 +47,8 @@
 		%>
 		<div>
 			<table border="1">
-				<tr>	
+				<tr>
+					<th>번호</th>
 					<th>문의사항</th>
 					<th>문의날짜</th>
 					<th>답변</th>
@@ -59,6 +60,7 @@
 					for(HashMap<String, Object> m : list) {
 				%>
 						<tr>
+							<td><%=m.get("helpNo")%></td>
 							<td><%=m.get("helpMemo")%></td>
 							<td><%=m.get("helpCreatedate") %></td>				
 							<td>

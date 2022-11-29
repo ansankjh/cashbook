@@ -79,48 +79,6 @@ public class HelpDao {
 		dbUtil.close(rs, stmt, conn);
 		return row;
 	}
-	// 고객센터 게시판 글 조회 helpList.jsp
-	public ArrayList<HashMap<String, Object>> selectHelpList(String memberId) throws Exception {
-		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
-		/*
-		SELECT h.help_no, h.help_memo, h.member_id
-			, h.updatedate, h.createdate 
-			, c.comment_no
-			, c.comment_memo
-			FROM help h LEFT OUTER JOIN COMMENT c 
-			ON h.help_no = c.help_no WHERE h.member_id = 'goodee';
-		 */
-		// 쿼리문작성
-		String sql = "SELECT h.help_no helpNo, h.help_memo helpMemo"
-				+ " , h.createdate helpCreatedate, c.comment_memo commentMemo"
-				+ " , c.createdate commentCreateDate"
-				+ " FROM help h LEFT OUTER JOIN comment c"
-				+ " ON h.help_no = c.help_no WHERE h.member_id = ?";
-		// 초기화
-		DBUtil dbUtil = new DBUtil();
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		// 연결, 값 지정
-		conn = dbUtil.getConnection();
-		stmt = conn.prepareStatement(sql);
-		
-		stmt.setString(1, memberId);
-		// 쿼리 실행		
-		rs = stmt.executeQuery();
-		while(rs.next()) {
-			HashMap<String, Object> m = new HashMap<String, Object>();
-			m.put("helpNo", rs.getInt("helpNo"));
-			m.put("helpMemo", rs.getString("helpMemo"));
-			m.put("helpCreatedate", rs.getString("helpCreatedate"));
-			m.put("commentMemo", rs.getString("commentMemo"));
-			m.put("commentCreateDate", rs.getString("commentCreateDate"));			
-			list.add(m);
-		}		
-		
-		dbUtil.close(rs, stmt, conn);
-		return list;
-	}
 	
 	// comment 답변조회
 	public ArrayList<HashMap<String, Object>> selectComment(int helpNo) throws Exception {
