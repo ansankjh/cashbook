@@ -39,52 +39,64 @@
 %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<div>
-		<jsp:include page="/inc/menu.jsp"></jsp:include>
-	</div>		
-	<div>
-		<!-- adminMain content&페이징 -->
-		<table>
-			<tr>
-				<th>공지내용</th>
-				<th>날짜</th>
-			</tr>
-			<!-- 공지내용 및 날짜 -->
-			<%
-				for(Notice n : list) {
-			%>
-					<tr>
-						<td><%=n.getNoticeMemo()%></td>
-						<td><%=n.getCreatedate()%></td>
-					</tr>
-			<%
-				}
-			%>			
-		</table>
-		<!-- 페이징 -->
+	<head>
+		<meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Agency - Start Bootstrap Theme</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+	</head>
+	<body>
 		<div>
-			<a href="<%=request.getContextPath()%>/admin/adminMain.jsp?currentPage=1">처음</a>
-			<%
-				if(currentPage > 1) {
-			%>
-					<a href="<%=request.getContextPath()%>/admin/adminMain.jsp?currentPage=<%=currentPage-1%>">이전</a>
-			<%=currentPage%>
-			<%
-				}
-			
-				if(currentPage < lastPage) {
-			%>
-					<a href="<%=request.getContextPath()%>/admin/adminMain.jsp?currentPage=<%=currentPage+1%>">다음</a>
-			<%
-				}
-			%>				
-			<a href="<%=request.getContextPath()%>/admin/adminMain.jsp?currentPage=<%=lastPage%>">마지막</a>
+			<jsp:include page="/inc/menu.jsp"></jsp:include>
+		</div>		
+		<div>
+			<!-- adminMain content&페이징 -->
+			<table>
+				<tr>
+					<th>공지내용</th>
+					<th>날짜</th>
+				</tr>
+				<!-- 공지내용 및 날짜 -->
+				<%
+					for(Notice n : list) {
+				%>
+						<tr>
+							<td><%=n.getNoticeMemo()%></td>
+							<td><%=n.getCreatedate()%></td>
+						</tr>
+				<%
+					}
+				%>			
+			</table>
+			<!-- 페이징 -->
+			<div>
+				<a href="<%=request.getContextPath()%>/admin/adminMain.jsp?currentPage=1">처음</a>
+				<%
+					if(currentPage > 1) {
+				%>
+						<a href="<%=request.getContextPath()%>/admin/adminMain.jsp?currentPage=<%=currentPage-1%>">이전</a>
+				<%=currentPage%>
+				<%
+					}
+				
+					if(currentPage < lastPage) {
+				%>
+						<a href="<%=request.getContextPath()%>/admin/adminMain.jsp?currentPage=<%=currentPage+1%>">다음</a>
+				<%
+					}
+				%>				
+				<a href="<%=request.getContextPath()%>/admin/adminMain.jsp?currentPage=<%=lastPage%>">마지막</a>
+			</div>
 		</div>
-	</div>
-</body>
+	</body>
 </html>

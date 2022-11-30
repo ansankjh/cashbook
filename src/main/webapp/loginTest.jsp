@@ -54,7 +54,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>        
+        </nav>
         <section class="page-section" id="contact">
 			<!-- 공지(5개)목록 페이징 -->
 			<div class="container">
@@ -74,8 +74,8 @@
 							</div>
 						</div>
 						<div class="col-md-6">
-							<div class="container form-group form-group-textarea mb-md-0">
-								<table class="table text-warning" style="width:700px;">
+							<div class="form-group form-group-textarea mb-md-0">
+								<table class="text-warning">
 									<tr>
 										<th>공지내용</th>
 										<th>날짜</th>
@@ -98,7 +98,7 @@
 										if(currentPage > 1) {
 									%>
 											<a href="<%=request.getContextPath()%>/loginForm.jsp?currentPage=<%=currentPage-1%>">이전</a>
-									<span class="text-info"><%=currentPage%></span>
+									<%=currentPage%>
 									<%	
 										}
 									

@@ -68,16 +68,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<style>
-			table {
-				margin : auto;
-			}			
-			.center {
-				text-align : left;
-				font-size : 15pt;
-				font-weight : bold;
-			} 
-		</style>
 		<meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -97,7 +87,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand " href="#page-top"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
+                <a class="navbar-brand" href="#page-top"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
@@ -106,10 +96,6 @@
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <div>
 							<jsp:include page="/inc/menu.jsp"></jsp:include>
-							<a style="text-decoration:none;" href="<%=request.getContextPath()%>/updateMemberForm.jsp">[정보수정]</a>
-							<a style="text-decoration:none;" href="<%=request.getContextPath()%>/updateMemberPwForm.jsp">[비밀번호수정]</a>
-							<a style="text-decoration:none;" href="<%=request.getContextPath()%>/deleteMemberForm.jsp">[회원탈퇴]</a>
-							<a style="text-decoration:none;" href="<%=request.getContextPath()%>/logout.jsp">[로그아웃]</a>
 						</div>
                     </ul>
                 </div>
@@ -117,19 +103,19 @@
         </nav>
 		
 		<header class="masthead">
-			<h1>
-				<%=loginMember.getMemberName()%>님의 가계부	달력
-			</h1>	
 			<div>
-				<a class="text-danger" style="text-decoration:none;" href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">&#8701;이전달</a>
+				<%=loginMember.getMemberName()%>님 반갑습니다.<a href="<%=request.getContextPath()%>/logout.jsp">[로그아웃]</a>	
+			</div>	
+			<div>
+				<a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">&#8701;이전달</a>
 				<%=year%>년 <%=month+1%> 월
-				<a class="text-info" style="text-decoration:none;" href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month+1%>">다음달&#8702;</a>
+				<a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month+1%>">다음달&#8702;</a>
 			</div>
 			<div class="container">
 				<!-- 달력 -->
-				<table class="table table-bordered text-warning center" style="width:1200px;">
+				<table class="table text-warning" style="width:1000px;" align="center">
 					<tr>
-						<th class="text-danger">일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th class="text-info">토</th>
+						<th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th>
 					</tr>
 					<tr>
 						<%
@@ -153,12 +139,11 @@
 													String cashDate = (String)(m.get("cashDate"));
 													if(Integer.parseInt(cashDate.substring(8)) == date) {
 											%>
-														<span class="text-success">
 														[<%=(String)(m.get("categoryKind"))%>]
 														<%=(String)(m.get("categoryName"))%>
 														&nbsp;
 														<%=(Long)(m.get("cashPrice"))%>원
-														<br></span>											
+														<br>												
 											<%
 													}
 												}
@@ -180,7 +165,17 @@
 					</tr>
 				</table>
 			</div>	
-			<div>		
+			<div>			
+				<%
+					if(loginMember.getMemberLevel() > 0) {
+				%>
+						<a href="<%=request.getContextPath()%>/admin/adminMain.jsp">관리자페이지</a>
+				<%	
+					}				
+				%>
+				<a href="<%=request.getContextPath()%>/updateMemberForm.jsp">정보수정</a>
+				<a href="<%=request.getContextPath()%>/updateMemberPwForm.jsp">비밀번호수정</a>
+				<a href="<%=request.getContextPath()%>/deleteMemberForm.jsp">회원탈퇴</a>
 				<%
 					if(msg != null) {
 				%>

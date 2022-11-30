@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "dao.*" %>
 <%@ page import = "vo.*" %>
@@ -16,7 +17,8 @@
 	MemberDao memberDao = new MemberDao();	
 	Member resultMember  = memberDao.login(paramMember);
 	
-	String redirectUrl = "/loginForm.jsp?";	
+	String redirectUrl = "/loginForm.jsp";
+	String msg = URLEncoder.encode("로그인 실패", "utf-8");
 	if(resultMember != null) {
 		// 로그인 성공시 Member타입의 loginMember에 resultMember를 저장한다
 		session.setAttribute("loginMember", resultMember); // session안에 로그인 ID와 이름이 저장
