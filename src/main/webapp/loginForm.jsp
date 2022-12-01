@@ -67,10 +67,10 @@
 					<div class="row align-items-stretch mb-5">	
 						<div class="col-md-6">
 							<div class="form-group">
-								<input style="width:300px;" id="name" type="text" placeholder="Your Id *" data-sb-validations="required" name="memberId">
+								<input style="width:400px;" id="name" type="text" placeholder="Your Id *" data-sb-validations="required" name="memberId">
 							</div>
 							<div class="form-group">
-								<input style="width:300px;" id="email" type="password" placeholder="Your Password *" data-sb-validations="required,email" name="memberPw">
+								<input style="width:400px;" id="email" type="password" placeholder="Your Password *" data-sb-validations="required,email" name="memberPw">
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -113,11 +113,11 @@
 							</div>
 						</div>
 						<div>
-							<button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">로그인</button>
+							<button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">로그인</button>
 						</div>						
 					</div>
 				</form>
 			</div>
-		</section>
+		</section>		
 	</body>
 </html>

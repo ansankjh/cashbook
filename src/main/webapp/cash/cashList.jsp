@@ -71,6 +71,8 @@
 		<style>
 			table {
 				margin : auto;
+				width : 1200px;
+				height : 500px;
 			}			
 			.center {
 				text-align : left;
@@ -104,31 +106,29 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <div>
-							<jsp:include page="/inc/menu.jsp"></jsp:include>
-							<a style="text-decoration:none;" href="<%=request.getContextPath()%>/updateMemberForm.jsp">[정보수정]</a>
-							<a style="text-decoration:none;" href="<%=request.getContextPath()%>/updateMemberPwForm.jsp">[비밀번호수정]</a>
-							<a style="text-decoration:none;" href="<%=request.getContextPath()%>/deleteMemberForm.jsp">[회원탈퇴]</a>
-							<a style="text-decoration:none;" href="<%=request.getContextPath()%>/logout.jsp">[로그아웃]</a>
-						</div>
+                    	<jsp:include page="/inc/menu.jsp"></jsp:include>    
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/updateMemberForm.jsp">정보수정</a></li>
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/updateMemberPwForm.jsp">비밀번호수정</a></li>
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/deleteMemberForm.jsp">회원탈퇴</a></li>
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a></li>						                
                     </ul>
                 </div>
             </div>
-        </nav>
-		
+        </nav>		
 		<header class="masthead">
 			<h1>
 				<%=loginMember.getMemberName()%>님의 가계부	달력
 			</h1>	
 			<div>
-				<a class="text-danger" style="text-decoration:none;" href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">&#8701;이전달</a>
+				<a class="text-danger" href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">&#8701;이전달</a>
 				<%=year%>년 <%=month+1%> 월
-				<a class="text-info" style="text-decoration:none;" href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month+1%>">다음달&#8702;</a>
+				<a class="text-info" href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month+1%>">다음달&#8702;</a>
 			</div>
+			
 			<div class="container">
 				<!-- 달력 -->
 				<table class="table table-bordered text-warning center" style="width:1200px;">
-					<tr>
+					<tr class="bg-light opacity-50" align="center" style="height:20px;">
 						<th class="text-danger">일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th class="text-info">토</th>
 					</tr>
 					<tr>
@@ -141,7 +141,7 @@
 									if(date > 0 && date <= lastDate) {
 						%>
 										<div>
-		 									<a href="<%=request.getContextPath()%>/cashDateList.jsp?year=<%=year%>&month=<%=month+1%>&date=<%=date%>">									
+		 									<a style="text-decoration:none" href="<%=request.getContextPath()%>/cashDateList.jsp?year=<%=year%>&month=<%=month+1%>&date=<%=date%>">									
 												<%=date%>
 											</a>
 										</div>
@@ -190,5 +190,14 @@
 				%>
 			</div>
 		</header>
+		<!-- Bootstrap core JS-->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+		<!-- Core theme JS-->
+		<script src="js/scripts.js"></script>
+		<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+		<!-- * *                               SB Forms JS                               * *-->
+		<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+		<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+		<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 	</body>
 </html>
