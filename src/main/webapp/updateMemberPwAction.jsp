@@ -30,7 +30,7 @@
 	
 	// 모델 호출
 	MemberDao memberDao = new MemberDao();
-	if(memberDao.memberPwCk(memberPw2)) {
+	if(memberDao.memberPwCk(member)) {
 		String msg = URLEncoder.encode("기존 비밀번호와 같습니다", "utf-8");
 		response.sendRedirect(request.getContextPath()+"/updateMemberPwForm.jsp?msg="+msg);
 		return;
@@ -42,7 +42,7 @@
 		response.sendRedirect(request.getContextPath()+"/loginForm.jsp?msg="+msg);
 		return;
 	} else {
-		String msg = URLEncoder.encode("기존 비밀번호가 다릅니다.", "utf-8");						
+		String msg = URLEncoder.encode("비밀번호 오류", "utf-8");						
 		response.sendRedirect(request.getContextPath()+"/updateMemberPwForm.jsp?msg="+msg);
 	}	
 %>

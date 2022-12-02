@@ -10,7 +10,6 @@ public class DBUtil {
 		
 		return conn;
 	}
-	// ()넘어오는값 받는거
 	public void close(ResultSet rs, PreparedStatement stmt , Connection conn) throws Exception {
 		if(rs != null) {
 			rs.close();

@@ -38,15 +38,15 @@
 							</td>
 						</tr>					
 						<tr>
-							<td>수정할 비밀번호</td>
-							<td>
-								<input type="password" name="memberPw2">
-							</td>
-						</tr>
-						<tr>
 							<td>기존 비밀번호</td>
 							<td>
 								<input type="password" name="memberPw">
+							</td>
+						</tr>
+						<tr>
+							<td>새로운 비밀번호</td>
+							<td>
+								<input type="password" name="memberPw2">
 							</td>
 						</tr>
 					</table>
