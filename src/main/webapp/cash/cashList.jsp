@@ -69,8 +69,12 @@
 <html>
 	<head>
 		<style>
+			body {
+			    background-image: url(assets/img/header-bg.jpg);
+			    background-size: cover;
+			}
 			table {
-				margin : auto;
+				margin-top : 50px;
 				width : 1200px;
 				height : 500px;
 			}			
@@ -78,13 +82,13 @@
 				text-align : left;
 				font-size : 15pt;
 				font-weight : bold;
-			} 
+			}			
 		</style>
 		<meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Agency - Start Bootstrap Theme</title>
+        <title>cashList</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -106,6 +110,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    	<li class="nav-item"></li>
                     	<jsp:include page="/inc/menu.jsp"></jsp:include>    
 						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/updateMemberForm.jsp">정보수정</a></li>
 						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/updateMemberPwForm.jsp">비밀번호수정</a></li>
@@ -115,81 +120,83 @@
                 </div>
             </div>
         </nav>		
-		<header class="masthead">
-			<h1>
-				<%=loginMember.getMemberName()%>님의 가계부	달력
-			</h1>	
-			<div>
-				<a class="text-danger" href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">&#8701;이전달</a>
-				<%=year%>년 <%=month+1%> 월
-				<a class="text-info" href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month+1%>">다음달&#8702;</a>
-			</div>
-			
-			<div class="container">
-				<!-- 달력 -->
-				<table class="table table-bordered text-warning center" style="width:1200px;">
-					<tr class="bg-light opacity-50" align="center" style="height:20px;">
-						<th class="text-danger">일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th class="text-info">토</th>
-					</tr>
-					<tr>
-						<%
-							for(int i=1; i<=totalTd; i++) {
-						%>
-								<td>
-						<%
-									int date = i-beginBlank;
-									if(date > 0 && date <= lastDate) {
-						%>
-										<div>
-		 									<a style="text-decoration:none" href="<%=request.getContextPath()%>/cashDateList.jsp?year=<%=year%>&month=<%=month+1%>&date=<%=date%>">									
-												<%=date%>
-											</a>
-										</div>
-										<div>
-											<% 
-												// substring(8) index가 8인 위치를 포함한 문자열을 리턴 ex) 2022-11-22 -> 22 리턴
-												// 그렇게 뽑아낸 cashDate의 날짜와 실제 달력의 날짜가 같으면 밑에 값 출력 
-												for(HashMap<String, Object> m : list) {
-													String cashDate = (String)(m.get("cashDate"));
-													if(Integer.parseInt(cashDate.substring(8)) == date) {
-											%>
-														<span class="text-success">
-														[<%=(String)(m.get("categoryKind"))%>]
-														<%=(String)(m.get("categoryName"))%>
-														&nbsp;
-														<%=(Long)(m.get("cashPrice"))%>원
-														<br></span>											
-											<%
-													}
-												}
-											%>							
-										</div>
-						<%				
-									}
-						%>
-								</td>
-						<%
+		
+		<div align="center" style="margin-top:150px;">
+			<h2 class="text-warning">				
 								
-								if(i%7 == 0 && i != totalTd) {
-						%>
-									</tr><tr> <!-- td7개 만들고 테이블 줄바꿈 -->
-						<%			
+			</h2>
+			<h1 class="text-warning">
+				<a class="text-danger" href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">&#8701;이전달</a>
+				<%=year%>년 <%=month+1%>월 <%=loginMember.getMemberName()%>님의 가계부달력
+				<a class="text-info" href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month+1%>">다음달&#8702;</a>
+			</h1>			
+		</div>
+		
+		
+		<div class="container">
+			<!-- 달력 -->			
+			<table class="table table-bordered" align="center">
+				<tr class="bg-light opacity-50" align="center" style="height:20px;">
+					<th class="text-danger">일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th class="text-info">토</th>
+				</tr>
+				<tr>
+					<%
+						for(int i=1; i<=totalTd; i++) {
+					%>
+							<td>
+					<%
+								int date = i-beginBlank;
+								if(date > 0 && date <= lastDate) {
+					%>
+									<div>
+	 									<a style="text-decoration:none" href="<%=request.getContextPath()%>/cashDateList.jsp?year=<%=year%>&month=<%=month+1%>&date=<%=date%>">									
+											<%=date%>
+										</a>
+									</div>
+									<div>
+										<% 
+											// substring(8) index가 8인 위치를 포함한 문자열을 리턴 ex) 2022-11-22 -> 22 리턴
+											// 그렇게 뽑아낸 cashDate의 날짜와 실제 달력의 날짜가 같으면 밑에 값 출력 
+											for(HashMap<String, Object> m : list) {
+												String cashDate = (String)(m.get("cashDate"));
+												if(Integer.parseInt(cashDate.substring(8)) == date) {
+										%>
+													<span style="color:Brown; font-weight:bold;">
+													[<%=(String)(m.get("categoryKind"))%>]
+													<%=(String)(m.get("categoryName"))%>
+													&nbsp;
+													<%=(Long)(m.get("cashPrice"))%>원
+													<br></span>											
+										<%
+												}
+											}
+										%>							
+									</div>
+					<%				
 								}
+					%>
+							</td>
+					<%
+							
+							if(i%7 == 0 && i != totalTd) {
+					%>
+								</tr><tr> <!-- td7개 만들고 테이블 줄바꿈 -->
+					<%			
 							}
-						%>
-					</tr>
-				</table>
-			</div>	
-			<div>		
-				<%
-					if(msg != null) {
-				%>
-						<%=msg%>
-				<%
-					}
-				%>
-			</div>
-		</header>
+						}
+					%>
+				</tr>
+			</table>
+		</div>	
+		<div>		
+			<%
+				if(msg != null) {
+			%>
+					<%=msg%>
+			<%
+				}
+			%>
+		</div>		
 		<!-- Bootstrap core JS-->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 		<!-- Core theme JS-->
