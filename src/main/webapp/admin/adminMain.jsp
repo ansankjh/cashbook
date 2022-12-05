@@ -28,6 +28,8 @@
 	NoticeDao noticeDao = new NoticeDao();
 	// 공지 목록
 	ArrayList<Notice> list = noticeDao.selectNoticeListByPage(beginRow, rowPerPage);
+	// 멤버 목록
+	ArrayList<Member> memberList = noticeDao.selectMember();
 	// 페이징에 쓰일 총 행의 수 & 마지막 페이지
 	int cnt = noticeDao.selectNoticeCount();
 	// System.out.println(cnt);
@@ -41,6 +43,11 @@
 <html>
 	<head>
 		<style>
+			table {
+				margin-top : 200px;		
+				width : 700px;
+				height : 500px;
+			}
 			body {
 			    background-image: url(assets/img/camera.jpg);
 			    background-size: cover;
@@ -50,7 +57,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Agency - Start Bootstrap Theme</title>
+        <title>adminMain</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -65,7 +72,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand " href="#page-top"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
+                <a class="navbar-brand " href="#page-top"><%=loginMember.getMemberName()%>(등급:<%=loginMember.getMemberLevel()%>)님 접속</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
@@ -83,28 +90,28 @@
         </nav>       
 		<div>
 			<jsp:include page="/inc/menu.jsp"></jsp:include>
-		</div>		
-		<div>
+		</div>
+		<div class="container">
 			<!-- adminMain content&페이징 -->
-			<table>
-				<tr>
+			<table class="table table-bordered" align="center" style="width:700px;">
+				<tr class="align-middle bg-dark text-warning" align="center">
 					<th>공지내용</th>
-					<th>날짜</th>
+					<th style="width:200px;">날짜</th>
 				</tr>
 				<!-- 공지내용 및 날짜 -->
 				<%
 					for(Notice n : list) {
 				%>
-						<tr>
+						<tr class="align-middle bg-white">
 							<td><%=n.getNoticeMemo()%></td>
 							<td><%=n.getCreatedate()%></td>
 						</tr>
 				<%
 					}
-				%>			
+				%>
 			</table>
 			<!-- 페이징 -->
-			<div>
+			<div align="center">
 				<a href="<%=request.getContextPath()%>/admin/adminMain.jsp?currentPage=1">처음</a>
 				<%
 					if(currentPage > 1) {
@@ -122,6 +129,6 @@
 				%>				
 				<a href="<%=request.getContextPath()%>/admin/adminMain.jsp?currentPage=<%=lastPage%>">마지막</a>
 			</div>
-		</div>
+		</div>		
 	</body>
 </html>

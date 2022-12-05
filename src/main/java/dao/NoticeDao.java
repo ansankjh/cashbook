@@ -1,10 +1,11 @@
 package dao;
 
 import java.sql.*;
+
 import java.util.ArrayList;
 
 import util.DBUtil;
-import vo.Notice;
+import vo.*;
 
 public class NoticeDao {
 	// 공지 삭제
@@ -180,8 +181,7 @@ public class NoticeDao {
 		return list;
 	}
 	
-	// 공지 내용 value값
-	
+	// 공지 내용 value값	
 	public ArrayList<Notice> selectNotice(int noticeNo) {
 		ArrayList<Notice> noticeList = null;
 		DBUtil dbUtil = null;
@@ -218,5 +218,42 @@ public class NoticeDao {
 			}
 		}
 		return noticeList;
+	}
+	// adminMain.jsp 최근 멤버 목록 조회
+	public ArrayList<Member> selectMember() {
+		ArrayList<Member> list = null;
+		DBUtil dbUtil = null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT member_no memberNo, member_id memberId, member_level memberLevel, member_name memberName, createdate FROM member ORDER BY member_no DESC";
+		try {
+			// db연결
+			dbUtil = new DBUtil();
+			conn = dbUtil.getConnection();
+			// 객체 생성
+			stmt = conn.prepareStatement(sql);			
+			// 쿼리 실행
+			rs = stmt.executeQuery();
+			list = new ArrayList<Member>();
+			if(rs.next()) {
+				Member m = new Member();
+				m.setMemberNo(rs.getInt("memberNo"));
+				m.setMemberId(rs.getString("memberId"));
+				m.setMemberLevel(rs.getInt("memberLevel"));
+				m.setMemberName(rs.getString("memberName"));
+				m.setCreatedate(rs.getString("createdate"));
+				list.add(m);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				dbUtil.close(rs, stmt, conn);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 }

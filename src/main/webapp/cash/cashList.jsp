@@ -77,12 +77,7 @@
 				margin-top : 50px;
 				width : 1200px;
 				height : 500px;
-			}			
-			.center {
-				text-align : left;
-				font-size : 15pt;
-				font-weight : bold;
-			}			
+			}						
 		</style>
 		<meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -103,7 +98,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand " href="#page-top"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
+                <a class="navbar-brand " href="#page-top"><%=loginMember.getMemberName()%>(등급:<%=loginMember.getMemberLevel()%>)님 접속</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
