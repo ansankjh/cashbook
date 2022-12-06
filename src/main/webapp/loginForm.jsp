@@ -64,7 +64,7 @@
 				<br>
 				<br>
 				<form action="<%=request.getContextPath()%>/loginAction.jsp" method="post" id="contactForm" data-sb-form-api-token="API_TOKEN">
-					<div class="row align-items-stretch mb-5">	
+					<div class="row align-items-stretch mb-5">
 						<div class="col-md-6">
 							<div class="form-group">
 								<input style="width:400px;" id="name" type="text" placeholder="Your Id *" data-sb-validations="required" name="memberId">

@@ -23,7 +23,7 @@
 	
 	// Model
 	HelpDao helpDao = new HelpDao();
-	ArrayList<HashMap<String, Object>> list = helpDao.selectHelpList(beginRow, rowPerPage);
+	ArrayList<HashMap<String, Object>> list = helpDao.selectHelpList(memberId, beginRow, rowPerPage);
 	int cnt = helpDao.helpCount();
 	int lastPage = cnt / rowPerPage;
 %>

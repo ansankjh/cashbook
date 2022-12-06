@@ -9,7 +9,7 @@ public class HelpDao {
 	// 관리자쪽에서 호출
 	// selectHelpList 오버로딩 : 메서드 이름이 같은데 매개값이 다른것
 	// admin/helpListAll.jsp
-	public ArrayList<HashMap<String, Object>> selectHelpList(int beginRow, int rowPerPage) {
+	public ArrayList<HashMap<String, Object>> selectHelpList(String memberId, int beginRow, int rowPerPage) {
 		ArrayList<HashMap<String, Object>> list = null;
 		DBUtil dbUtil = null;
 		Connection conn = null;
@@ -29,7 +29,7 @@ public class HelpDao {
 				+ " , c.createdate commentCreatedate, h.member_id memberId"
 				+ " , c.comment_no commentNo"
 				+ " FROM help h LEFT OUTER JOIN comment c"
-				+ " ON h.help_no = c.help_no ORDER BY h.help_no DESC"
+				+ " ON h.help_no = c.help_no WHERE h.member_id = ? ORDER BY h.help_no DESC"
 				+ " LIMIT ?, ?";
 		try {
 			// 초기화
@@ -37,8 +37,9 @@ public class HelpDao {
 			// 연결, 값 지정
 			conn = dbUtil.getConnection();
 			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, beginRow);
-			stmt.setInt(2, rowPerPage);
+			stmt.setString(1, memberId);
+			stmt.setInt(2, beginRow);
+			stmt.setInt(3, rowPerPage);
 			// 쿼리 실행		
 			rs = stmt.executeQuery();
 			list = new ArrayList<HashMap<String, Object>>();
