@@ -4,6 +4,7 @@
 <%@ page import = "java.net.URLEncoder" %>
 <%
 	// Controller
+	request.setCharacterEncoding("utf-8");
 	String memberId = request.getParameter("memberId");
 	String memberPw = request.getParameter("memberPw"); // 기존비번
 	String memberPw2 = request.getParameter("memberPw2"); // 수정할 비밀번호

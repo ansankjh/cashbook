@@ -9,9 +9,11 @@
 			div {
 				text-align : center;
 			}
-			table {
-				margin : auto;
-			}
+			.center {
+				text-align : center;
+				font-size : 30pt;
+				font-weight : bold;
+			}	
 		</style>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -28,10 +30,10 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
 	</head>
-	<body>
+	<body>      
 		<section class="page-section" id="contact">
 			<div>
-				<h1>회원가입</h1>
+				<h1 style="color:blue;">회원가입</h1>
 			</div>
 			<%
 				if(msg != null) {
@@ -41,29 +43,26 @@
 				}
 			%>					
 			<form action="<%=request.getContextPath()%>/insertMemberAction.jsp" method="post" id="contactForm" data-sb-form-api-token="API_TOKEN">	
-				<div class="row align-items-stretch mb-5">
-					<div class="col-md-6">
-						<div class="form-group">						
-							<input style="width:400px;" id="name" type="text" placeholder="Your Id *" data-sb-validations="required" name="memberId">					
+				<div>
+					<div>
+						<div class="form-group" align="center">						
+							<input style="width:400px;" id="name" type="text" placeholder="아이디를 입력해주세요." data-sb-validations="required" name="memberId">					
 						</div>	
-						<div class="form-group">		
-							<input style="width:400px;" id="name" type="password" placeholder="Your PassWord *" data-sb-validations="required" name="memberPw">
+						<div class="form-group" align="center">		
+							<input style="width:400px;" id="name" type="password" placeholder="비밀번호를 입력해주세요." data-sb-validations="required" name="memberPw">
 						</div>
-						<div class="form-group">	
-							<input style="width:400px;" id="name" type="password" placeholder="Your Your PassWordCheck *" data-sb-validations="required" name="memberPw2">
+						<div class="form-group" align="center">	
+							<input style="width:400px;" id="name" type="password" placeholder="비밀번호를 한번 더 입력해주세요." data-sb-validations="required" name="memberPw2">
 						</div>		
-						<div class="form-group">					
-							<input style="width:400px;" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" name="memberName">
+						<div class="form-group" align="center">					
+							<input style="width:400px;" id="name" type="text" placeholder="이름을 입력해주세요." data-sb-validations="required" name="memberName">
 						</div>				
 					</div>	
 				</div>		
-				<div>
-					<button type="submit">회원가입</button>
+				<div class="form-group center">
+					<button style="width:400px; height:70px;" type="submit">회원가입</button>
 				</div>
-			</form>
-			<div>
-				<a href="<%=request.getContextPath()%>/loginForm.jsp">뒤로</a>
-			</div>
+			</form>			
 		</section>
 	</body>
 </html>

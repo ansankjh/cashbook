@@ -4,6 +4,7 @@
 <%@ page import = "java.net.URLEncoder" %>
 <%
 	// Controller	
+	request.setCharacterEncoding("utf-8");
 	String memberId = request.getParameter("memberId");
 	String memberName = request.getParameter("memberName");
 	String memberPw = request.getParameter("memberPw");
