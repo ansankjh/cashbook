@@ -43,7 +43,7 @@
 	<body>
 		<section class="page-section" id="contact">
 			<div>
-				<h1 style="color:yellow;">정보수정</h1>
+				<h1 style="color:yellow;">비밀번호</h1>
 			</div>
 			<%
 				if(msg != null) {
@@ -59,10 +59,10 @@
 							<input style="width:400px;" id="name" type="text" value="<%=memberId%>" data-sb-validations="required" name="memberId" readonly="readonly">					
 						</div>	
 						<div class="form-group" align="center">		
-							<input style="width:400px; color:red;" id="name" type="text" value="<%=memberName%>" data-sb-validations="required" name="memberName">
+							<input style="width:400px;" id="name" type="password" placeholder="기본 비밀번호를 입력해주세요." data-sb-validations="required" name="memberPw">
 						</div>
 						<div class="form-group" align="center">	
-							<input style="width:400px;" id="name" type="password" placeholder="비밀번호를 입력해주세요." data-sb-validations="required" name="memberPw">
+							<input style="width:400px;" id="name" type="password" placeholder="변경하실 비밀번호를 입력해주세요." data-sb-validations="required" name="memberPw2">
 						</div>										
 					</div>	
 				</div>		
@@ -70,43 +70,6 @@
 					<button style="width:400px; height:70px;" type="submit">수정</button>
 				</div>
 			</form>			
-		</section>
-		<h1>비밀번호 수정</h1>
-		<%
-			if(msg != null) {
-		%>
-				<%=msg%>
-		<%
-			}
-		%>
-		<div>
-			<form action="<%=request.getContextPath()%>/updateMemberPwAction.jsp">
-				<div>
-					<table>
-						<tr>
-							<td>아이디</td>
-							<td>
-								<input type="text" name="memberId" value="<%=memberId%>" readonly="readonly">
-							</td>
-						</tr>					
-						<tr>
-							<td>기존 비밀번호</td>
-							<td>
-								<input type="password" name="memberPw">
-							</td>
-						</tr>
-						<tr>
-							<td>새로운 비밀번호</td>
-							<td>
-								<input type="password" name="memberPw2">
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div>
-					<button type="submit">수정</button>
-				</div>
-			</form>
-		</div>
+		</section>		
 	</body>
 </html>

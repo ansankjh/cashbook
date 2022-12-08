@@ -6,6 +6,7 @@
 	// Controller
 	String msg = request.getParameter("msg");
 	Member loginMember = (Member)session.getAttribute("loginMember");
+	String memberId = loginMember.getMemberId();
 	// 관리자 아니면 못들어온다
 	if(loginMember == null || loginMember.getMemberLevel() < 1) {
 		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
@@ -21,7 +22,7 @@
 	int beginRow = (currentPage - 1) * rowPerPage;
 	// Model
 	HelpDao helpDao = new HelpDao();
-	ArrayList<HashMap<String, Object>> list = helpDao.selectHelpList(beginRow, rowPerPage);
+	ArrayList<HashMap<String, Object>> list = helpDao.selectHelpListAll(beginRow, rowPerPage);
 	int cnt = helpDao.helpCount();
 	// System.out.println(cnt);
 	int lastPage = cnt / rowPerPage;
