@@ -39,7 +39,7 @@
 			.position1 {
 				position : absolute;
 				top : -70px;
-				text-align : center;
+				left : 880px;
 			}
 		</style>
 		<meta charset="utf-8" />
@@ -114,7 +114,7 @@
 				%>			
 			</table>
 		</div>
-		<div>
+		<div align="center">
 		<!-- 페이징 -->
 			<a href="<%=request.getContextPath()%>/admin/noticeList.jsp?currentPage=1">처음</a>
 			<%
