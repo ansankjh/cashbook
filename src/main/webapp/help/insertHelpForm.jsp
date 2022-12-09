@@ -14,12 +14,20 @@
 <html>
 	<head>
 		<style>			
-			.center {
+			body {
+			    background-image: url(assets/img/pass.jpg);
+			    background-size: cover;			    
+			}
+			.font {
+				color : white;
 				text-align : center;
-				font-size : 30pt;
-				font-weight : bold;
-			}	
-		</style>
+			}
+			.position1 {
+				position: absolute;
+				top : -70px;
+				left : 880px;
+			}
+		</style>	
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -35,8 +43,8 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
 	</head>
-	<body style="margin-top:300px;">
-		<h1 class="center">문의하기</h1>
+	<body>
+		<h1 class="font position1">문의하기</h1>
 		<%
 			if(msg != null) {
 		%>
@@ -44,26 +52,25 @@
 		<%
 			}
 		%>
-		<div align="center">
+		<div class="container">
 			<form action="<%=request.getContextPath()%>/help/insertHelpAction.jsp" method="post">
-				<div>
-					<table>						
-						<tr>
-							<td>아이디</td>
-							<td>
-								<input type="text" name="memberId" value="<%=memberId%>" readonly="readonly">
-							</td>
-						</tr>
-						<tr>
-							<td>문의내용</td>
-							<td>
-								<textarea cols="50" rows="5" name="helpMemo"></textarea>
-							</td>
-						</tr>						
-					</table>
+				<div align="center" style="margin-top : 230px">
+					<div class="font">
+						아이디 :
+					</div>
+					<div>
+						<input style="width:400px;" type="text" name="memberId" value="<%=memberId%>" readonly="readonly">
+					</div>				
+					<div class="font">
+						문의내용 :
+					</div>
+					<div>
+						<textarea cols="40" rows="10" name="helpMemo" placeholder="문의글을 입력해주세요."></textarea>
+					</div>
+					
 				</div>
-				<div>
-					<button type="submit">문의하기</button>
+				<div align="center">
+					<button type="submit"><img src="assets/img/question.jpg" style="width:120px;"></button>
 				</div>	
 			</form>
 		</div>

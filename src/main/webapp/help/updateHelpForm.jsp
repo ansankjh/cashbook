@@ -15,11 +15,38 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<style>			
+			body {
+			    background-image: url(assets/img/header-bg.jpg);
+			    background-size: cover;			    
+			}
+			.font {
+				color : white;
+				text-align : center;
+			}
+			.position1 {
+				position: absolute;
+				top : -70px;
+				left : 860px;
+			}
+		</style>	
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
 		<title>updateHelpForm</title>
+		<!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
 	</head>
 	<body>
-		<h1>문의글수정</h1>
+		<h1 class="font position1">문의글수정</h1>
 		<%
 			if(msg != null) {
 		%>
@@ -27,21 +54,18 @@
 		<%
 			}
 		%>
-		<div>
+		<div class="container">
 			<form action="<%=request.getContextPath()%>/help/updateHelpAction.jsp" method="post">
 				<input type="hidden" name="helpNo" value="<%=helpNo%>">
-				<div>
+				<div align="center" style="margin-top:250px;">
 					<table>
 						<tr>
-							<th>문의글수정</th>							
-						</tr>
-						<tr>
-							<td><textarea cols="50" rows="5" name="helpMemo"><%=helpMemo%></textarea></td>
+							<td><textarea cols="50" rows="10" name="helpMemo"><%=helpMemo%></textarea></td>
 						</tr>
 					</table>				
 				</div>
-				<div>
-					<button type="submit">수정</button>
+				<div align="center">
+					<button style="width:100px;" type="submit">수정</button>
 				</div>
 			</form>
 		</div>

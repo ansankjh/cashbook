@@ -87,10 +87,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>       
-		<div>
-			<jsp:include page="/inc/menu.jsp"></jsp:include>
-		</div>
+        </nav>       		
 		<div class="container">
 			<!-- adminMain content&페이징 -->
 			<table class="table table-bordered" align="center" style="width:700px;">
@@ -116,14 +113,14 @@
 				<%
 					if(currentPage > 1) {
 				%>
-						<a href="<%=request.getContextPath()%>/admin/adminMain.jsp?currentPage=<%=currentPage-1%>">이전</a>
-				<%=currentPage%>
+						<a href="<%=request.getContextPath()%>/admin/adminMain.jsp?currentPage=<%=currentPage-1%>"><img src="assets/img/previous.png" style="width:50px;"></a>
+				<span style="font-size:30px;"><%=currentPage%></span>
 				<%
 					}
 				
 					if(currentPage < lastPage) {
 				%>
-						<a href="<%=request.getContextPath()%>/admin/adminMain.jsp?currentPage=<%=currentPage+1%>">다음</a>
+						<a href="<%=request.getContextPath()%>/admin/adminMain.jsp?currentPage=<%=currentPage+1%>"><img src="assets/img/next.png" style="width:50px;"></a>
 				<%
 					}
 				%>				

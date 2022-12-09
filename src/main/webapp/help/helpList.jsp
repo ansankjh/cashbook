@@ -30,14 +30,59 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title>helpList</title>
+		<style>			
+			body {
+			    background-image: url(assets/img/camera.jpg);
+			    background-size: cover;
+			}
+			.font {
+				color : white;
+			}
+			.rect2 {
+			    position: absolute;
+    			top: -100px;
+			    left : 850px;
+			    text-align:center;
+   			}	
+   			.rect3 {
+			    position: absolute;
+    			top: -120px;
+			    right : 315px;
+   			}				   			   			
+		</style>
+		<meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>helpList</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />   
 	</head>
-	<body>
-		<div>
-			<jsp:include page="/inc/menu.jsp"></jsp:include>
-		</div>	
-		<h1>고객센터</h1>
+	<body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand " href="#page-top"><%=loginMember.getMemberName()%>님(등급:<%=loginMember.getMemberLevel()%>)</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/cash/cashList.jsp" style="font-size:30px;">뒤로</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+      
+		<h1 class="font rect2">고객센터</h1>
 		<%
 			if(msg != null) {
 		%>
@@ -45,96 +90,97 @@
 		<%
 			}
 		%>
-		<div>
-			<table border="1">
-				<tr>
-					<th>번호</th>
-					<th>문의사항</th>
-					<th>문의날짜</th>
-					<th>답변</th>
-					<th>답변날짜</th>
-					<th>수정</th>
-					<th>삭제</th>
-				</tr>
+		 <div class="container">
+			<div class="font" align="center" style="margin-top : 230px">
+				<table class="table table-bordered" >
+					<tr class="bg-warning font rec" align="center">
+						<th>번호</th>
+						<th>문의사항</th>
+						<th>문의날짜</th>
+						<th>답변</th>
+						<th>답변날짜</th>
+						<th>수정</th>
+						<th>삭제</th>
+					</tr>
+					<%
+						for(HashMap<String, Object> m : list) {
+					%>
+							<tr class="font" style="text-align:center; vertical-align:middle;">
+								<td><%=m.get("helpNo")%></td>
+								<td><%=m.get("helpMemo")%></td>
+								<td><%=m.get("helpCreatedate") %></td>				
+								<td>
+									<%
+										if(m.get("commentMemo") == null) {
+									%>
+											답변전
+									<%
+										} else {
+									%>
+											<%=m.get("commentMemo")%>
+									<%
+										}
+									%>								
+								</td>
+								<td>
+									<%
+										if(m.get("commentCreateDate") == null) {
+									%>
+											답변전
+									<%
+										} else {
+									%>
+											<%=m.get("commentCreateDate")%>
+									<%
+										}
+									%>											
+								</td>
+								<td>
+									<%
+										if(m.get("commentMemo") == null) {
+									%>
+											<a class="btn btn-info" href="<%=request.getContextPath()%>/help/updateHelpForm.jsp?helpNo=<%=m.get("helpNo")%>&helpMemo=<%=m.get("helpMemo")%>">수정</a>
+									<%
+										}
+									%>
+								</td>
+								<td>
+									<%
+										if(m.get("commentMemo") == null) {
+									%>
+											<a class="btn btn-danger" href="<%=request.getContextPath()%>/help/deleteHelp.jsp?helpNo=<%=m.get("helpNo")%>">삭제</a>
+									<%
+										}
+									%>
+								</td>													
+							</tr>
+					<%
+						}
+					%>
+				</table>
+			</div>
+			<div align="center">
+			<!-- 페이징 -->
+				<a class="btn btn-info" href="<%=request.getContextPath()%>/help/helpList.jsp?currentPage=1">처음</a>
 				<%
-					for(HashMap<String, Object> m : list) {
+					if(currentPage > 1) {
 				%>
-						<tr>
-							<td><%=m.get("helpNo")%></td>
-							<td><%=m.get("helpMemo")%></td>
-							<td><%=m.get("helpCreatedate") %></td>				
-							<td>
-								<%
-									if(m.get("commentMemo") == null) {
-								%>
-										답변전
-								<%
-									} else {
-								%>
-										<%=m.get("commentMemo")%>
-								<%
-									}
-								%>								
-							</td>
-							<td>
-								<%
-									if(m.get("commentCreateDate") == null) {
-								%>
-										답변전
-								<%
-									} else {
-								%>
-										<%=m.get("commentCreateDate")%>
-								<%
-									}
-								%>											
-							</td>
-							<td>
-								<%
-									if(m.get("commentMemo") == null) {
-								%>
-										<a href="<%=request.getContextPath()%>/help/updateHelpForm.jsp?helpNo=<%=m.get("helpNo")%>&helpMemo=<%=m.get("helpMemo")%>">수정</a>
-								<%
-									}
-								%>
-							</td>
-							<td>
-								<%
-									if(m.get("commentMemo") == null) {
-								%>
-										<a href="<%=request.getContextPath()%>/help/deleteHelp.jsp?helpNo=<%=m.get("helpNo")%>">삭제</a>
-								<%
-									}
-								%>
-							</td>													
-						</tr>
+						<a href="<%=request.getContextPath()%>/help/helpList.jsp?currentPage=<%=currentPage-1%>"><img src="assets/img/previous.png" style="width:50px;"></a>
+				<span style="font-size:30px;"><%=currentPage%></span>
+				<%
+					}
+				
+					if(currentPage < lastPage) {
+				%>
+						<a href="<%=request.getContextPath()%>/help/helpList.jsp?currentPage=<%=currentPage+1%>"><img src="assets/img/next.png" style="width:50px;"></a>
 				<%
 					}
 				%>
-			</table>
+				<a class="btn btn-info" href="<%=request.getContextPath()%>/help/helpList.jsp?currentPage=<%=lastPage%>">마지막</a>
+			</div>
+			<div>
+				<a class="rect3" href="<%=request.getContextPath()%>/help/insertHelpForm.jsp"><img src="assets/img/question.jpg" style="width:120px;"></a>
+			</div>
 		</div>
-		<div>
-		<!-- 페이징 -->
-			<a href="<%=request.getContextPath()%>/help/helpList.jsp?currentPage=1">처음</a>
-			<%
-				if(currentPage > 1) {
-			%>
-					<a href="<%=request.getContextPath()%>/help/helpList.jsp?currentPage=<%=currentPage-1%>">이전</a>
-			<%=currentPage%>
-			<%
-				}
-			
-				if(currentPage < lastPage) {
-			%>
-					<a href="<%=request.getContextPath()%>/help/helpList.jsp?currentPage=<%=currentPage+1%>">다음</a>
-			<%
-				}
-			%>
-			<a href="<%=request.getContextPath()%>/help/helpList.jsp?currentPage=<%=lastPage%>">마지막</a>
-		
-		
-		</div>
-		<a href="<%=request.getContextPath()%>/help/insertHelpForm.jsp">문의하기</a>
-		<a href="<%=request.getContextPath()%>/cash/cashList.jsp">뒤로</a>
 	</body>
 </html>
