@@ -29,7 +29,7 @@ public class HelpDao {
 				+ " , c.createdate commentCreatedate, h.member_id memberId"
 				+ " , c.comment_no commentNo"
 				+ " FROM help h LEFT OUTER JOIN comment c"
-				+ " ON h.help_no = c.help_no ORDER BY h.help_no DESC"
+				+ " ON h.help_no = c.help_no ORDER BY h.help_no ASC"
 				+ " LIMIT ?, ?";
 		try {
 			// 초기화
@@ -88,7 +88,7 @@ public class HelpDao {
 				+ " , c.createdate commentCreatedate, h.member_id memberId"
 				+ " , c.comment_no commentNo"
 				+ " FROM help h LEFT OUTER JOIN comment c"
-				+ " ON h.help_no = c.help_no WHERE h.member_id=? ORDER BY h.help_no DESC"
+				+ " ON h.help_no = c.help_no WHERE h.member_id=? ORDER BY h.help_no ASC"
 				+ " LIMIT ?, ?";
 		try {
 			// 초기화

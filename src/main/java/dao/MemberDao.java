@@ -115,7 +115,7 @@ public class MemberDao {
 		return cnt;
 	}
 	// 관리자가 멤버 리스트 띄울때 쓰는거
-	public ArrayList<Member> selectMemberListByPage(int beginRow, int rowPerPage) {
+	public ArrayList<Member> selectMemberListByPage() {
 		ArrayList<Member> memberList = null;
 		DBUtil dbUtil = null;
 		Connection conn = null;
@@ -146,12 +146,11 @@ public class MemberDao {
 					+ " , member_name memberName"
 					+ " , updatedate updateDate"
 					+ " , createdate createDate "
-					+ " FROM member ORDER BY member_no DESC LIMIT ?, ?";
+					+ " FROM member ORDER BY member_no ASC";
 			// 쿼리 객체 생성
 			stmt = conn.prepareStatement(sql);
-			// 쿼리문 ?값 지정
-			stmt.setInt(1, beginRow);
-			stmt.setInt(2, rowPerPage);
+		
+			
 			// 쿼리 실행
 			rs = stmt.executeQuery();
 			

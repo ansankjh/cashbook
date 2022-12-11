@@ -93,7 +93,7 @@
 		<!--  cash 목록 출력 -->		
 		<div align="center">
 			<h1 class="font" style="margin-top:150px;"><%=year%>년 <%=month%>월 <%=date%>일</h1>		
-			<table class="table table-bordered"  style="width:1350px; height:100px;">
+			<table class="table table-bordered"  style="width:1500px; height:100px;">
 				<tr class="bg-warning font">
 					<th>categoryKind</th>
 					<th>categoryName</th>
@@ -126,7 +126,7 @@
 				<input type="hidden" name="month" value="<%=month%>">
 				<input type="hidden" name="date" value="<%=date%>">
 			<div align="center">
-				<table class="table table-bordered font" style="width:1350px; height:100px; margin-top:100px;">
+				<table class="table table-bordered font" style="width:1500px; height:100px; margin-top:100px;">
 					<tr class="bg-warning font">
 						<th>categoryNo</th>
 						<th>cashDate</th>

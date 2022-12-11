@@ -77,7 +77,7 @@
 				margin-top : 50px;
 				width : 1200px;
 				height : 500px;
-			}						
+			}			
 		</style>
 		<meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -121,9 +121,9 @@
 								
 			</h2>
 			<h1 class="text-warning">
-				<a class="text-danger" href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">&#8701;이전달</a>
-				<%=year%>년 <%=month+1%>월 <%=loginMember.getMemberName()%>님의 가계부달력
-				<a class="text-info" href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month+1%>">다음달&#8702;</a>
+				<a class="text-danger" href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>"><img src="assets/img/previous.png" style="width:70px;"></a>
+				<%=year%>년 <%=month+1%>월 가계부
+				<a class="text-info" href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month+1%>"><img src="assets/img/next.png" style="width:70px;"></a>
 			</h1>			
 		</div>
 		

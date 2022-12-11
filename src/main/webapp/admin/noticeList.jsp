@@ -38,8 +38,17 @@
 			}
 			.position1 {
 				position : absolute;
-				top : -70px;
-				left : 880px;
+				top : -120px;
+				left : 715px;
+			}
+			.position2 {
+				position : absolute;
+				bottom : 10px;
+				left : 150px;
+			}
+			tr, td, th {
+				text-align : center;
+				vertical-align : middle;
 			}
 		</style>
 		<meta charset="utf-8" />
@@ -78,23 +87,22 @@
 	
 		<!-- noticeList contents -->
 		<div class="position1" align="center">
-			<h1 align="center" style="color:white">공지사항</h1>
+			<h1 align="center" style="color:white">공지관리</h1>
 			<%
 				if(msg != null) {
 			%>
 					<%=msg%>
 			<%
 				}
-			%>
-			<a href="<%=request.getContextPath()%>/admin/insertNoticeForm.jsp">공지입력</a>
+			%>			
 		</div>
-		<div align="center" style="margin-top:230px;">
-			<table style="color:white;">
+		<div align="center" style="margin-top:250px;">
+			<table class="table table-bordered" align="center" style="width:1300px; height:800px; color:white;">
 				<tr>
 					<th>공지내용</th>
-					<th>공지날짜</th> <!-- createdate -->
-					<th>수정</th>
-					<th>삭제</th>
+					<th style="width:300px;">공지날짜</th> <!-- createdate -->
+					<th style="width:100px;">수정</th>
+					<th style="width:100px;">삭제</th>
 				</tr>			
 				<%
 					for(Notice n : list) {
@@ -103,10 +111,10 @@
 							<td><%=n.getNoticeMemo()%></td>
 							<td><%=n.getCreatedate()%></td>
 							<td>
-								<a href="<%=request.getContextPath()%>/admin/updateNoticeForm.jsp?noticeNo=<%=n.getNoticeNo()%>">수정</a>
+								<a class="btn btn-info" href="<%=request.getContextPath()%>/admin/updateNoticeForm.jsp?noticeNo=<%=n.getNoticeNo()%>">수정</a>
 							</td>
 							<td>
-								<a href="<%=request.getContextPath()%>/admin/deleteNotice.jsp?noticeNo=<%=n.getNoticeNo()%>">삭제</a>
+								<a class="btn btn-danger" href="<%=request.getContextPath()%>/admin/deleteNotice.jsp?noticeNo=<%=n.getNoticeNo()%>">삭제</a>
 							</td>
 						</tr>
 				<%
@@ -120,18 +128,21 @@
 			<%
 				if(currentPage > 1) {
 			%>
-				<a href="<%=request.getContextPath()%>/admin/noticeList.jsp?currentPage=<%=currentPage-1%>">이전</a>
-			<%=currentPage%>
+				<a href="<%=request.getContextPath()%>/admin/noticeList.jsp?currentPage=<%=currentPage-1%>"><img src="assets/img/previous.png" style="width:50px;"></a>
+			<span style="font-size:30px;"><%=currentPage%></span>
 			<%
 				}
 			
 				if(currentPage < lastPage) {
 			%>
-					<a href="<%=request.getContextPath()%>/admin/noticeList.jsp?currentPage=<%=currentPage+1%>">다음</a>
+					<a href="<%=request.getContextPath()%>/admin/noticeList.jsp?currentPage=<%=currentPage+1%>"><img src="assets/img/next.png" style="width:50px;"></a>
 			<%
 				}
 			%>
 			<a href="<%=request.getContextPath()%>/admin/noticeList.jsp?currentPage=<%=lastPage%>">마지막</a>
+		</div>
+		<div class="position2">
+			<a class="btn btn-warning" href="<%=request.getContextPath()%>/admin/insertNoticeForm.jsp">공지입력</a>	
 		</div>
 	</body>
 </html>

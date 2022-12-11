@@ -226,7 +226,7 @@ public class NoticeDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT member_no memberNo, member_id memberId, member_level memberLevel, member_name memberName, createdate FROM member ORDER BY member_no DESC";
+		String sql = "SELECT member_id memberId, member_level memberLevel FROM member ORDER BY member_no ASC";
 		try {
 			// db연결
 			dbUtil = new DBUtil();
@@ -236,13 +236,10 @@ public class NoticeDao {
 			// 쿼리 실행
 			rs = stmt.executeQuery();
 			list = new ArrayList<Member>();
-			if(rs.next()) {
+			while(rs.next()) {
 				Member m = new Member();
-				m.setMemberNo(rs.getInt("memberNo"));
 				m.setMemberId(rs.getString("memberId"));
 				m.setMemberLevel(rs.getInt("memberLevel"));
-				m.setMemberName(rs.getString("memberName"));
-				m.setCreatedate(rs.getString("createdate"));
 				list.add(m);
 			}
 		} catch(Exception e) {

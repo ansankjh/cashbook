@@ -25,9 +25,8 @@
 				text-align : center;
 			}
 			.position1 {
-				position: absolute;
-				top : -70px;
-				left : 860px;
+				position: relative;
+				top : 210px;
 			}
 		</style>	
 		<meta charset="UTF-8">
@@ -46,7 +45,7 @@
         <link href="css/styles.css" rel="stylesheet" />
 	</head>
 	<body>
-		<h1 class="font position1">문의글수정</h1>
+		<h1 class="font position1" align="center">문의글수정</h1>
 		<%
 			if(msg != null) {
 		%>

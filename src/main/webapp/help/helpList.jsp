@@ -39,15 +39,13 @@
 				color : white;
 			}
 			.rect2 {
-			    position: absolute;
-    			top: -100px;
-			    left : 850px;
-			    text-align:center;
+			    position : relative;
+    			top : 100px;
    			}	
    			.rect3 {
-			    position: absolute;
-    			top: -120px;
-			    right : 315px;
+				position : relative;
+				top : 120px;
+				left : 145px;
    			}				   			   			
 		</style>
 		<meta charset="utf-8" />
@@ -82,7 +80,7 @@
             </div>
         </nav>
       
-		<h1 class="font rect2">고객센터</h1>
+		<h1 class="font rect2" align="center">고객센터</h1>
 		<%
 			if(msg != null) {
 		%>
@@ -90,8 +88,11 @@
 		<%
 			}
 		%>
+		<div>
+			<a class="rect3" href="<%=request.getContextPath()%>/help/insertHelpForm.jsp"><img src="assets/img/question.jpg" style="width:100px;"></a>
+		</div>
 		 <div class="container">
-			<div class="font" align="center" style="margin-top : 230px">
+			<div class="font" align="center" style="margin-top : 130px">
 				<table class="table table-bordered" >
 					<tr class="bg-warning font rec" align="center">
 						<th>번호</th>
@@ -177,9 +178,6 @@
 					}
 				%>
 				<a class="btn btn-info" href="<%=request.getContextPath()%>/help/helpList.jsp?currentPage=<%=lastPage%>">마지막</a>
-			</div>
-			<div>
-				<a class="rect3" href="<%=request.getContextPath()%>/help/insertHelpForm.jsp"><img src="assets/img/question.jpg" style="width:120px;"></a>
 			</div>
 		</div>
 	</body>

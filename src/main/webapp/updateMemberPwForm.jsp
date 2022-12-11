@@ -59,7 +59,7 @@
 							<input style="width:400px;" id="name" type="text" value="<%=memberId%>" data-sb-validations="required" name="memberId" readonly="readonly">					
 						</div>	
 						<div class="form-group" align="center">		
-							<input style="width:400px;" id="name" type="password" placeholder="기본 비밀번호를 입력해주세요." data-sb-validations="required" name="memberPw">
+							<input style="width:400px;" id="name" type="password" placeholder="기존 비밀번호를 입력해주세요." data-sb-validations="required" name="memberPw">
 						</div>
 						<div class="form-group" align="center">	
 							<input style="width:400px;" id="name" type="password" placeholder="변경하실 비밀번호를 입력해주세요." data-sb-validations="required" name="memberPw2">

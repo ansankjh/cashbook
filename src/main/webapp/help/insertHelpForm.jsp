@@ -23,9 +23,8 @@
 				text-align : center;
 			}
 			.position1 {
-				position: absolute;
-				top : -70px;
-				left : 880px;
+				position: relative;
+				top : 200px;
 			}
 		</style>	
 		<meta charset="UTF-8">
@@ -44,7 +43,7 @@
         <link href="css/styles.css" rel="stylesheet" />
 	</head>
 	<body>
-		<h1 class="font position1">문의하기</h1>
+		<h1 class="font position1" align="center">문의하기</h1>
 		<%
 			if(msg != null) {
 		%>

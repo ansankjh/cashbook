@@ -42,15 +42,34 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<style>
-			table {
-				margin-top : 200px;		
-				width : 700px;
-				height : 500px;
-			}
+		<style>			
 			body {
 			    background-image: url(assets/img/camera.jpg);
 			    background-size: cover;
+			}
+			tr, td, th {
+				text-align : center;
+				vertical-align : middle;
+			}
+			.po0 {
+				position : absolute;
+				top : 160px;
+				left : 675px;
+			}
+			.po1 {
+				position : absolute;
+				top : 300px;
+				left : 200px;
+			}
+			.po2 {
+				position : absolute;
+				top : 300px;
+				right : 200px;
+			}
+			.po3 {
+				position : absolute;
+				bottom : -280px;
+				left : 350px;
 			}
 		</style>
 		<meta charset="utf-8" />
@@ -89,26 +108,45 @@
             </div>
         </nav>       		
 		<div class="container">
+			<h1 class="po0" style="color:white;">관리자 페이지</h1>
 			<!-- adminMain content&페이징 -->
-			<table class="table table-bordered" align="center" style="width:700px;">
-				<tr class="align-middle bg-dark text-warning" align="center">
-					<th>공지내용</th>
-					<th style="width:200px;">날짜</th>
-				</tr>
-				<!-- 공지내용 및 날짜 -->
-				<%
-					for(Notice n : list) {
-				%>
-						<tr class="align-middle bg-white">
-							<td><%=n.getNoticeMemo()%></td>
-							<td><%=n.getCreatedate()%></td>
-						</tr>
-				<%
-					}
-				%>
-			</table>
+			<div>
+				<table class="table table-bordered po1" align="center" style="width:500px;">
+					<tr class="align-middle bg-dark text-warning" align="center">
+						<th>공지내용</th>
+						<th style="width:200px;">날짜</th>
+					</tr>
+					<!-- 공지내용 및 날짜 -->
+					<%
+						for(Notice n : list) {
+					%>
+							<tr class="align-middle bg-white">
+								<td><%=n.getNoticeMemo()%></td>
+								<td><%=n.getCreatedate()%></td>
+							</tr>
+					<%
+						}
+					%>
+				</table>
+				<table class="table table-bordered po2" align="center" style="width:500px;">
+					<tr class="align-middle bg-dark text-warning" align="center">
+						<th>아이디</th>
+						<th>등급</th>
+					</tr>
+					<%
+						for(Member m : memberList) {
+					%>
+							<tr class="align-middle bg-white">
+								<td><%=m.getMemberId()%></td>
+								<td><%=m.getMemberLevel()%></td>
+							</tr>
+					<%
+						}
+					%>
+				</table>
+			</div>
 			<!-- 페이징 -->
-			<div align="center">
+			<div class="po3" align="center">
 				<a href="<%=request.getContextPath()%>/admin/adminMain.jsp?currentPage=1">처음</a>
 				<%
 					if(currentPage > 1) {
