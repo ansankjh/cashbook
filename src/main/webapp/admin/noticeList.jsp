@@ -37,9 +37,8 @@
 			    background-size : cover;
 			}
 			.position1 {
-				position : absolute;
-				top : -120px;
-				left : 715px;
+				position : relative;
+				top : 120px;
 			}
 			.position2 {
 				position : absolute;
@@ -86,8 +85,8 @@
 		
 	
 		<!-- noticeList contents -->
-		<div class="position1" align="center">
-			<h1 align="center" style="color:white">공지관리</h1>
+		<div >
+			<h1 class="position1" align="center" style="color:white">공지관리</h1>
 			<%
 				if(msg != null) {
 			%>
@@ -96,7 +95,7 @@
 				}
 			%>			
 		</div>
-		<div align="center" style="margin-top:250px;">
+		<div align="center" style="margin-top:180px;">
 			<table class="table table-bordered" align="center" style="width:1300px; height:800px; color:white;">
 				<tr>
 					<th>공지내용</th>

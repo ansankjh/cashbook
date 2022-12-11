@@ -31,9 +31,8 @@
 				vertical-align : middle;
 			}
 			.po {
-				position : absolute;
-				top : -80px;
-				left : 715px;
+				position : relative;
+				top : 150px;
 			}
 		</style>
 		<meta charset="utf-8" />
@@ -72,7 +71,7 @@
 		<div class="container">
 			<!-- memberList contents -->
 			<!-- 여기서는 오로지 멤버 탈퇴시키는거랑 멤버 레벨수정 있음 인서트는 없음 -->
-			<h1 class="po" style="color:white">멤버목록</h1>
+			<h1 class="po" style="color:white" align="center">멤버목록</h1>
 			<%
 				if(msg != null) {
 			%>

@@ -52,24 +52,23 @@
 				vertical-align : middle;
 			}
 			.po0 {
-				position : absolute;
+				position : relative;
 				top : 160px;
-				left : 675px;
 			}
 			.po1 {
 				position : absolute;
 				top : 300px;
-				left : 200px;
+				left : 250px;
 			}
 			.po2 {
 				position : absolute;
 				top : 300px;
-				right : 200px;
+				right : 250px;
 			}
 			.po3 {
-				position : absolute;
-				bottom : -280px;
-				left : 350px;
+				position : relative; 
+				top : 180px;
+				left : 130px;
 			}
 		</style>
 		<meta charset="utf-8" />
@@ -108,7 +107,7 @@
             </div>
         </nav>       		
 		<div class="container">
-			<h1 class="po0" style="color:white;">관리자 페이지</h1>
+			<h1 class="po0" style="color:white;" align="center">관리자 페이지</h1>
 			<!-- adminMain content&페이징 -->
 			<div>
 				<table class="table table-bordered po1" align="center" style="width:500px;">
@@ -146,7 +145,7 @@
 				</table>
 			</div>
 			<!-- 페이징 -->
-			<div class="po3" align="center">
+			<div class="po3">
 				<a href="<%=request.getContextPath()%>/admin/adminMain.jsp?currentPage=1">처음</a>
 				<%
 					if(currentPage > 1) {

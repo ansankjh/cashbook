@@ -32,9 +32,8 @@
 				vertical-align : middle;
 			}
 			.po {
-				position : absolute;
-				top : 110px;
-				left : 665px;
+				position : relative;
+				top : 130px;
 			}
 			.po2 {
 				position : relative;
@@ -77,7 +76,7 @@
 	
 		<div class="container">
 			<!-- categoryList contents -->		
-			<h1 class="po" style="color:white">카테고리 목록</h1>
+			<h1 class="po" style="color:white" align="center">카테고리 목록</h1>
 			<%
 				if(msg != null) {
 			%>

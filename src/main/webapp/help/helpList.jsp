@@ -45,7 +45,7 @@
    			.rect3 {
 				position : relative;
 				top : 120px;
-				left : 145px;
+				left : 310px;
    			}				   			   			
 		</style>
 		<meta charset="utf-8" />
