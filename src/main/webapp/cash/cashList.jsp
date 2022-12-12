@@ -155,8 +155,18 @@
 											for(HashMap<String, Object> m : list) {
 												String cashDate = (String)(m.get("cashDate"));
 												if(Integer.parseInt(cashDate.substring(8)) == date) {
+													if(m.get("categoryKind").equals("수입")) {
 										%>
-													<span style="color:Brown; font-weight:bold;">
+														<span style="color:blue;">
+										<%
+													} else {
+										%>
+														<span style="color:red;">
+										<%
+														
+													}
+										%>
+													
 													[<%=(String)(m.get("categoryKind"))%>]
 													<%=(String)(m.get("categoryName"))%>
 													&nbsp;
