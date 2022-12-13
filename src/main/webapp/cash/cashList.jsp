@@ -61,8 +61,11 @@
 	// Model 호출 : 일별 cash 목록
 	CashDao cashDao = new CashDao();
 	ArrayList<HashMap<String, Object>> list  = cashDao.selectCashListByMonth(loginMember.getMemberId(), year, month+1);
-
 	
+	ArrayList<HashMap<String, Object>> list3 = cashDao.selectSumAvgByMonth(loginMember.getMemberId(), year);
+	HashMap<String, Object> m2 = cashDao.selectMaxMinYear();
+	int minYear = (Integer)(m2.get("minYear"));
+	int maxYear = (Integer)(m2.get("maxYear"));
 	// View : 달력출력 + 일별 cash 목록 출력
 %>
 <!DOCTYPE html>
@@ -106,7 +109,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                     	<li class="nav-item"></li>
-                    	<jsp:include page="/inc/menu.jsp"></jsp:include>    
+                    	<jsp:include page="/inc/menu.jsp"></jsp:include>                    	
 						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/updateMemberForm.jsp">정보수정</a></li>
 						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/updateMemberPwForm.jsp">비밀번호수정</a></li>
 						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/deleteMemberForm.jsp">회원탈퇴</a></li>
@@ -116,7 +119,7 @@
             </div>
         </nav>		
 		
-		<div align="center" style="margin-top:150px;">
+		<div align="center" style="margin-top:100px;">
 			<h2 class="text-warning">				
 								
 			</h2>
@@ -192,7 +195,7 @@
 					%>
 				</tr>
 			</table>
-		</div>	
+		</div>
 		<div>		
 			<%
 				if(msg != null) {

@@ -69,6 +69,9 @@
 				<div class="form-group center">
 					<button style="width:400px; height:70px;" type="submit">수정</button>
 				</div>
+				<div class="form-group">
+					<a class="btn btn-light" style="width:400px; height:70px; font-size:30pt;" href="<%=request.getContextPath()%>/cash/cashList.jsp">취소</a>
+				</div>
 			</form>			
 		</section>		
 	</body>

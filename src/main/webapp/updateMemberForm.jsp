@@ -14,8 +14,6 @@
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	String memberId = loginMember.getMemberId();
 	String memberName = loginMember.getMemberName();
-	
-
 %>
 <!DOCTYPE html>
 <html>
@@ -28,7 +26,7 @@
 				text-align : center;
 				font-size : 30pt;
 				font-weight : bold;
-			}	
+			}
 		</style>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -74,6 +72,9 @@
 				<div class="form-group center">
 					<button style="width:400px; height:70px;" type="submit">수정</button>
 				</div>
+				<div class="form-group">
+					<a class="btn btn-light" style="width:400px; height:70px; font-size:30pt;" href="<%=request.getContextPath()%>/cash/cashList.jsp">취소</a>
+				</div>				
 			</form>			
 		</section>
 	</body>

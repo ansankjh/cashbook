@@ -93,7 +93,7 @@
 		</div>
 		 <div class="container">
 			<div class="font" align="center" style="margin-top : 130px">
-				<table class="table table-bordered" >
+				<table class="table table-bordered">
 					<tr class="bg-warning font rec" align="center">
 						<th>번호</th>
 						<th>문의사항</th>

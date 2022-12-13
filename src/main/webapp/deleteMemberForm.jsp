@@ -46,7 +46,7 @@
 	<body>
 		<section class="page-section" id="contact">
 			<div>
-				<h1 style="color:blue;">회원탈퇴</h1>
+				<h1 style="color:yellow;">회원탈퇴</h1>
 			</div>
 			<%
 				if(msg != null) {
@@ -71,6 +71,9 @@
 				</div>		
 				<div class="form-group center">
 					<button style="width:400px; height:70px;" type="submit">회원탈퇴</button>
+				</div>
+				<div class="form-group">
+					<a class="btn btn-light" style="width:400px; height:70px; font-size:30pt;" href="<%=request.getContextPath()%>/cash/cashList.jsp">취소</a>
 				</div>
 			</form>			
 		</section>

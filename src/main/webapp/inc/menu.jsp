@@ -9,6 +9,7 @@
 	<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
 		<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/cash/cashList.jsp">홈</a></li>
 		<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/help/helpList.jsp">고객센터</a></li>
+		<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/statsMain.jsp">수입&지출 리스트</a></li>
 	</ul>
 <%
 	} else if(loginMember.getMemberLevel() == 1) {
