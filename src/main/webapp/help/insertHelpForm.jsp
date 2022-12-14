@@ -26,6 +26,10 @@
 				position: relative;
 				top : 200px;
 			}
+			.po {
+				position : relative;
+				top : 200px;
+			}
 		</style>	
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -42,18 +46,34 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
 	</head>
-	<body>
+	<body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/help/helpList.jsp" style="font-size:30px;">뒤로</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 		<h1 class="font position1" align="center">문의하기</h1>
 		<%
 			if(msg != null) {
 		%>
-				<%=msg%>
+				<div class="po" align="center" style="color:yellow;">
+					<%=msg%>
+				</div>
 		<%
 			}
 		%>
 		<div class="container">
 			<form action="<%=request.getContextPath()%>/help/insertHelpAction.jsp" method="post">
-				<div align="center" style="margin-top : 230px">
+				<div align="center" style="margin-top : 200px">
 					<div class="font">
 						아이디 :
 					</div>

@@ -33,12 +33,14 @@
 	<body>      
 		<section class="page-section" id="contact">
 			<div>
-				<h1 style="color:blue;">회원가입</h1>
+				<h1 style="color:yellow;">회원가입</h1>
 			</div>
 			<%
 				if(msg != null) {
 			%>
-					<%=msg%>
+					<div aling="center" style="color:red;">
+						<%=msg%>
+					</div>
 			<%
 				}
 			%>					
@@ -46,13 +48,13 @@
 				<div>
 					<div>
 						<div class="form-group" align="center">						
-							<input style="width:400px;" id="name" type="text" placeholder="아이디를 입력해주세요." data-sb-validations="required" name="memberId">					
+							<input style="width:400px;" id="id" type="text" placeholder="아이디를 입력해주세요." data-sb-validations="required" name="memberId">					
 						</div>	
 						<div class="form-group" align="center">		
-							<input style="width:400px;" id="name" type="password" placeholder="비밀번호를 입력해주세요." data-sb-validations="required" name="memberPw">
+							<input style="width:400px;" id="memberPw" type="password" placeholder="비밀번호를 입력해주세요." data-sb-validations="required" name="memberPw">
 						</div>
 						<div class="form-group" align="center">	
-							<input style="width:400px;" id="name" type="password" placeholder="비밀번호를 한번 더 입력해주세요." data-sb-validations="required" name="memberPw2">
+							<input style="width:400px;" id="memberPw2" type="password" placeholder="비밀번호를 한번 더 입력해주세요." data-sb-validations="required" name="memberPw2">
 						</div>		
 						<div class="form-group" align="center">					
 							<input style="width:400px;" id="name" type="text" placeholder="이름을 입력해주세요." data-sb-validations="required" name="memberName">
@@ -60,9 +62,60 @@
 					</div>	
 				</div>		
 				<div class="form-group center">
-					<button style="width:400px; height:70px;" type="submit">회원가입</button>
+					<button style="width:400px; height:70px;" type="button" id="insertBtn">회원가입</button>
+				</div>
+				<div class="form-group">
+					<a class="btn btn-light" style="width:400px; height:70px; font-size:30pt;" href="<%=request.getContextPath()%>/cash/cashList.jsp">취소</a>
 				</div>
 			</form>			
 		</section>
+		<br>
+		<script>
+			let insertBtn = document.querySelector('#insertBtn');
+			
+			insertBtn.addEventListener('click', function(){
+				// console.log()는 주로 디버깅할때 쓴다.
+				console.log('insertBtn click!');
+				
+				// 아이디 폼 유효성 검사
+				let id = document.querySelector('#id');
+				if(id.value == '') {
+					alert('아이디를 입력해주세요.');
+					id.focus();
+					return;
+				}
+				
+				// 비밀번호 폼 유효성 검사
+				let memberPw = document.querySelector('#memberPw');
+				let memberPw2 = document.querySelector('#memberPw2');
+				if(memberPw.value != memberPw2.value && memberPw.value != '' && memberPw2.value != '') {
+					alert('비밀번호를 확인해주세요.');
+					memberPw.focus();
+					return;
+				} else if(memberPw.value == '') {
+					alert('비밀번호를 입력해주세요.');
+					memberPw.focus();
+					return;
+				} else if(memberPw2.value == '') {
+					alert('비밀번호를 한번 더 입력해주세요.');
+					memberPw.focus();
+					return;
+				}
+				
+				
+				// 닉네임 폼 유효성 검사
+				let name = document.querySelector('#name');
+				if(name.value == '') {
+					alert('닉네임을 입력해주세요.');
+					name.focus();
+					return;
+				}
+				
+				
+				
+				let contactForm = document.querySelector('#contactForm');
+				contactForm.submit();
+			});
+		</script>
 	</body>
 </html>

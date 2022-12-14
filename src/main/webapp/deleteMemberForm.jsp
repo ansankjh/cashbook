@@ -51,7 +51,9 @@
 			<%
 				if(msg != null) {
 			%>
-					<%=msg%>
+					<div align="center" style="color:red;">
+						<%=msg%>
+					</div>
 			<%
 				}
 			%>					
@@ -59,23 +61,42 @@
 				<div>
 					<div>
 						<div class="form-group" align="center">						
-							<input style="width:400px;" id="name" type="text" data-sb-validations="required" name="memberId" value="<%=memberId%>" readonly="readonly">					
+							<input style="width:400px;" id="id" type="text" data-sb-validations="required" name="memberId" value="<%=memberId%>" readonly="readonly">					
 						</div>	
 						<div class="form-group" align="center">		
 							<input style="width:400px;" id="name" type="text" data-sb-validations="required" name="memberName" value="<%=memberName%>" readonly="readonly">
 						</div>
 						<div class="form-group" align="center">	
-							<input style="width:400px;" id="name" type="password" placeholder="비밀번호를 입력해주세요." data-sb-validations="required" name="memberPw">
+							<input style="width:400px;" id="pw" type="password" placeholder="비밀번호를 입력해주세요." data-sb-validations="required" name="memberPw">
 						</div>													
 					</div>	
 				</div>		
 				<div class="form-group center">
-					<button style="width:400px; height:70px;" type="submit">회원탈퇴</button>
+					<button style="width:400px; height:70px;" type="button" id="deleteBtn">회원탈퇴</button>
 				</div>
 				<div class="form-group">
 					<a class="btn btn-light" style="width:400px; height:70px; font-size:30pt;" href="<%=request.getContextPath()%>/cash/cashList.jsp">취소</a>
 				</div>
 			</form>			
 		</section>
+		<script>
+			let deleteBtn = document.querySelector('#deleteBtn');
+			
+			deleteBtn.addEventListener('click', function(){
+				// console.log()는 주로 디버깅할때 쓴다.
+				console.log('deleteBtn click!')
+					
+				// 아이디 폼 유효성 검사
+				let pw = document.querySelector('#pw');
+				if(pw.value == '') {
+					alert('비밀번호를 입력하세요.');
+					pw.focus(); // 브라우저의 커서를 id태그로 이동
+					return;
+				}
+				
+				let contactForm = document.querySelector('#contactForm');
+				contactForm.submit();
+			});
+		</script>	
 	</body>
 </html>

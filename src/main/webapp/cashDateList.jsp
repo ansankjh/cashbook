@@ -37,7 +37,7 @@
 	<head>
 		<style>
 			table {
-				width : 1400px;
+				width : 1500px;
 				height : 100px;
 				text-align : center;
 				border : 1;
@@ -84,7 +84,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/cash/cashList.jsp">뒤로</a></li>
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/cash/cashList.jsp" style="font-size:30px;">뒤로</a></li>
                     </ul>
                 </div>
             </div>
@@ -99,8 +99,8 @@
 					<th>categoryName</th>
 					<th>cashPrice</th>
 					<th>cashMemo</th>		
-					<th>수정</th> <!-- @/cash/updateCash.jsp?cashNo=를 넘겨준다 --> <!-- @/cash/deleteCash.jsp?cashNo=를 넘겨준다 -->
-					<th>삭제</th>
+					<th style="width:100px;">수정</th> <!-- @/cash/updateCash.jsp?cashNo=를 넘겨준다 --> <!-- @/cash/deleteCash.jsp?cashNo=를 넘겨준다 -->
+					<th style="width:100px;">삭제</th>
 				</tr>
 				<%
 					for(HashMap<String, Object> m : list) {		
@@ -168,9 +168,11 @@
 		<%
 			if(msg != null) {
 		%>
-				<%=msg%>
+				<div align="center" style="color:blue; font-size:30px;">
+					<%=msg%>
+				</div>
 		<%
 			}
-		%>
+		%>	
 	</body>
 </html>

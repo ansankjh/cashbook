@@ -54,16 +54,24 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
 	</head>
-	<body>
+	<body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand " href="#page-top"><%=loginMember.getMemberName()%>님(등급:<%=loginMember.getMemberLevel()%>)</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/admin/memberList.jsp" style="font-size:30px;">뒤로</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 		<div class="container">
 			<h1 class="po1" align="center" style="color:white">회원등급수정</h1>
-			<%
-				if(msg != null) {
-			%>
-					<span style="color:white"><%=msg%></span>
-			<%
-				}
-			%>
 			<form action="<%=request.getContextPath()%>/admin/updateMemberLevelAction.jsp" method="post">
 				<input type="hidden" name="memberNo" value="<%=memberNo%>">
 				<div align="center" style="margin-top:200px;">

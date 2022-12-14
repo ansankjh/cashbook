@@ -40,9 +40,8 @@
 				vertical-align : middle;
 			}
 			.po {
-				position : absolute;
-				top : -100px;
-				left : 665px;
+				position : relative;
+				top : 150px;
 			}
 		</style>
 		<meta charset="utf-8" />
@@ -73,13 +72,14 @@
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                     	<li class="nav-item"></li>
                     	<jsp:include page="/inc/menu.jsp"></jsp:include>    
+                    	<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a></li>
                     </ul>
                 </div>
             </div>
         </nav>	
         
 		<div class="conatiner">
-			<h1 class="po" style="color:white">고객센터 문의목록</h1>
+			<h1 class="po" style="color:white" align="center">고객센터 문의목록</h1>
 			<%
 				if(msg !=null) {
 			%>

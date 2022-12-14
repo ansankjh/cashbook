@@ -40,26 +40,31 @@
 			body {
 				background-image: url(assets/img/camera.jpg);
 				background-size : cover;
-			}			
-			.po0 {
-				position : relative;
-				top : 100px;
 			}
-			.po1 {
-				position : relative;
-				top : 250px;
+			.po_h1 {
+				position : absolute;
+				top : 150px;
+				left : 250px;
 			}
 			.po_table1 {
-				position : relative;
+				position : absolute;
+				top : 250px;
+				left : 150px;			
+			}
+			.po_h2 {
+				position : absolute;
 				top : 150px;
+				right : 190px;
 			}
 			.po_table2 {
-				position : relative;
-				top : 300px;
+				position : absolute;
+				top : 250px;
+				right : 150px;
 			}
 			.po_page {
-				position : relative;
-				bottom : 250px;
+				position : absolute;
+				top : 215px;
+				right : 155px;
 			}
 		</style>
 		<meta charset="utf-8" />
@@ -70,7 +75,7 @@
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"></script>
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
@@ -92,11 +97,12 @@
                     </ul>
                 </div>
             </div>
-        </nav>		
-		<div>
-			<h1 class="po0" style="color:white" align="center">년도별 총 수입/지출 리스트</h1>
+        </nav>
+        
+		<div class="container">
+			<h1 class="po_h1" style="color:white">년도별 총 수입/지출 리스트</h1>
 			<div>
-				<table class="table table-bordered po_table1" align="center" style="width:1000px;">
+				<table class="table table-bordered po_table1" style="width:700px; text-align:center;">
 					<tr style="color:white;">
 						<th>년</th>
 						<th>수입카운트</th>
@@ -122,10 +128,25 @@
 						}
 					%>
 				</table>
-			</div>
-			<h1 class="po1" style="color:white" align="center"><%=year%>년 월별 총 수입/지출 리스트</h1>
-			<div>
-				<table class="table table-bordered po_table2" align="center" style="width:1000px;">
+				
+				<h1 class="po_h2" style="color:white"><%=year%>년 월별 총 수입/지출 리스트</h1>
+				<div class="po_page">
+					<!-- 페이징 -->
+					<%
+						if(year > minYear) {
+					%>
+							<a style="text-decoration : none;" href="<%=request.getContextPath()%>/statsMain.jsp?year=<%=year-1%>">이전년도</a>
+					<%
+						}
+					
+						if(year < maxYear) {
+					%>
+							<a style="text-decoration : none;" href="<%=request.getContextPath()%>/statsMain.jsp?year=<%=year+1%>">다음년도</a>
+					<%
+						}
+					%>
+				</div>
+				<table class="table table-bordered po_table2" style="width:700px; text-align:center;">
 					<tr style="color:white;">
 						<th>월</th>
 						<th>수입카운트</th>
@@ -151,22 +172,6 @@
 						}
 					%>
 				</table>
-				<div class="po_page" align="center">
-				<!-- 페이징 -->
-				<%
-					if(year > minYear) {
-				%>
-						<a style="text-decoration : none;" href="<%=request.getContextPath()%>/statsMain.jsp?year=<%=year-1%>">이전년도</a>
-				<%
-					}
-				
-					if(year < maxYear) {
-				%>
-						<a style="text-decoration : none;" href="<%=request.getContextPath()%>/statsMain.jsp?year=<%=year+1%>">다음년도</a>
-				<%
-					}
-				%>
-				</div>
 			</div>
 		</div>
 	</body>

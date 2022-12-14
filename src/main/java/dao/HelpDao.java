@@ -159,6 +159,40 @@ public class HelpDao {
 		return row;
 	}
 	
+	// helpList.jsp 총 행의수 아이디별로
+	// Help 테이블 총 행의 수
+		public int helpCountByMember(String memberId) {
+			int row = 0;
+			// 쿼리문 작성
+			String sql = "SELECT COUNT(*) FROM help WHERE member_id = ?";
+			DBUtil dbUtil  = null;
+			// 드라이버 연결 초기화
+			Connection conn = null;
+			// 쿼리 객체 초기화
+			PreparedStatement stmt = null;
+			// 쿼리 실행 초기화
+			ResultSet rs = null;
+			try {
+				dbUtil = new DBUtil();
+				// 값 넣기
+				conn = dbUtil.getConnection();
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, memberId);
+				rs = stmt.executeQuery();
+				if(rs.next()) {
+					row = rs.getInt("COUNT(*)");
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					dbUtil.close(rs, stmt, conn);
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return row;
+		}
 	// comment 답변조회
 	public ArrayList<HashMap<String, Object>> selectComment(int helpNo) {
 		ArrayList<HashMap<String, Object>> list = null;

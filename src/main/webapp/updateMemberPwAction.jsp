@@ -43,7 +43,7 @@
 		response.sendRedirect(request.getContextPath()+"/loginForm.jsp?msg="+msg);
 		return;
 	} else {
-		String msg = URLEncoder.encode("비밀번호 오류", "utf-8");						
+		String msg = URLEncoder.encode("기존 비밀번호를 확인해주세요.", "utf-8");						
 		response.sendRedirect(request.getContextPath()+"/updateMemberPwForm.jsp?msg="+msg);
 	}	
 %>

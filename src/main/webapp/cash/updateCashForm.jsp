@@ -11,6 +11,7 @@
 		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
 		return;
 	}
+	String msg = request.getParameter("msg");
 	// 로그인 정보 불러오기
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	String memberId = loginMember.getMemberId();
@@ -87,6 +88,15 @@
         </nav>    
         
 		<h1 class="font position">Cash 수정</h1>
+		<%
+			if(msg != null) {
+		%>
+				<div align="center" style="color:red;">
+					<%=msg%>
+				</div>
+		<%
+			}
+		%>
 		<div class="container">
 			<form action="<%=request.getContextPath()%>/cash/updateCashAction.jsp">
 				<input type="hidden" name="memberId" value="<%=loginMember.getMemberId()%>">

@@ -24,7 +24,7 @@
 	// Model
 	HelpDao helpDao = new HelpDao();
 	ArrayList<HashMap<String, Object>> list = helpDao.selectHelpList(memberId, beginRow, rowPerPage);
-	int cnt = helpDao.helpCount();
+	int cnt = helpDao.helpCountByMember(memberId);
 	int lastPage = cnt / rowPerPage;
 %>
 <!DOCTYPE html>
@@ -36,7 +36,7 @@
 			    background-size: cover;
 			}
 			.font {
-				color : white;
+				color : white;				
 			}
 			.rect2 {
 			    position : relative;
@@ -44,9 +44,14 @@
    			}	
    			.rect3 {
 				position : relative;
-				top : 120px;
+				top : 70px;
 				left : 310px;
-   			}				   			   			
+   			}
+   			.rect4 {
+				position : relative;
+				top : 150px;
+   			}	   			
+   			
 		</style>
 		<meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -84,7 +89,9 @@
 		<%
 			if(msg != null) {
 		%>
-				<%=msg%>
+				<div class="rect4" align="center" style="color:yellow; font-size:30px;">
+					<%=msg%>
+				</div>
 		<%
 			}
 		%>
@@ -92,9 +99,9 @@
 			<a class="rect3" href="<%=request.getContextPath()%>/help/insertHelpForm.jsp"><img src="assets/img/question.jpg" style="width:100px;"></a>
 		</div>
 		 <div class="container">
-			<div class="font" align="center" style="margin-top : 130px">
-				<table class="table table-bordered">
-					<tr class="bg-warning font rec" align="center">
+			<div align="center">
+				<table class="table table-bordered font" style="margin-top:80px;">
+					<tr class="bg-warning font rec" style="text-align:center;">
 						<th>번호</th>
 						<th>문의사항</th>
 						<th>문의날짜</th>

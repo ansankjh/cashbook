@@ -32,7 +32,7 @@
 		<!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"></script>
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
@@ -61,13 +61,20 @@
 				<div class="text-center">
 					<h1 class="section-heading text-uppercase">로그인</h1>
 				</div>
+				<%
+					if(msg != null) {
+				%>
+						<span style="color:red;"><%=msg%></span>
+				<%
+					}
+				%>					
 				<br>
 				<br>
 				<form action="<%=request.getContextPath()%>/loginAction.jsp" method="post" id="contactForm" data-sb-form-api-token="API_TOKEN">
 					<div class="row align-items-stretch mb-5">
 						<div class="col-md-6">
 							<div class="form-group">
-								<input style="width:400px;" id="id" type="text" placeholder="Your Id *" data-sb-validations="required" name="memberId">
+								<input style="width:400px;" id="id" type="text" placeholder="Your Id *" data-sb-validations="required" name="memberId" onkeyup="fnEnterKey();">
 							</div>
 							<div class="form-group">
 								<input style="width:400px;" id="pw" type="password" placeholder="Your Password *" data-sb-validations="required,email" name="memberPw">
@@ -113,11 +120,38 @@
 							</div>
 						</div>
 						<div>
-							<button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">로그인</button>
+							<button class="btn btn-primary btn-xl text-uppercase" type="button" id="submitButton">로그인</button>
 						</div>						
 					</div>
 				</form>
 			</div>
-		</section>		
+		</section>	
+		<script>
+			let submitButton = document.querySelector('#submitButton');
+			
+			submitButton.addEventListener('click', function(){
+				// console.log()는 주로 디버깅할때 쓴다.
+				console.log('submitButton click!')
+					
+				// 아이디 폼 유효성 검사
+				let id = document.querySelector('#id');
+				if(id.value == '') {
+					alert('아이디를 입력하세요.');
+					id.focus(); // 브라우저의 커서를 id태그로 이동
+					return;
+				}
+				
+				// 비밀번호 폼 유효성 검사
+				let pw = document.querySelector('#pw');
+				if(pw.value == '') {
+					alert('비밀번호를 입력하세요.');
+					pw.focus(); // 브라우저의 커서를 id태그로 이동
+					return;
+				}
+				
+				let contactForm = document.querySelector('#contactForm');
+				contactForm.submit();
+			});
+		</script>	
 	</body>
 </html>

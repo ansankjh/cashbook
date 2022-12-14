@@ -68,7 +68,7 @@
 			.po3 {
 				position : relative; 
 				top : 180px;
-				left : 130px;
+				left : 115px;
 			}
 		</style>
 		<meta charset="utf-8" />
@@ -110,7 +110,7 @@
 			<h1 class="po0" style="color:white;" align="center">관리자 페이지</h1>
 			<!-- adminMain content&페이징 -->
 			<div>
-				<table class="table table-bordered po1" align="center" style="width:500px;">
+				<table class="table table-bordered po1" style="width:500px;">
 					<tr class="align-middle bg-dark text-warning" align="center">
 						<th>공지내용</th>
 						<th style="width:200px;">날짜</th>
@@ -127,7 +127,7 @@
 						}
 					%>
 				</table>
-				<table class="table table-bordered po2" align="center" style="width:500px;">
+				<table class="table table-bordered po2" style="width:500px;">
 					<tr class="align-middle bg-dark text-warning" align="center">
 						<th>아이디</th>
 						<th>등급</th>

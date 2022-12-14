@@ -37,8 +37,12 @@
 			}
 			.po2 {
 				position : relative;
-				bottom : -180px;
+				bottom : -170px;
 				right : -1170px;
+			}
+			.po3 {
+				position : relative;
+				top : 150px;
 			}
 		</style>
 		<meta charset="utf-8" />
@@ -68,7 +72,8 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                     	<li class="nav-item"></li>
-                    	<jsp:include page="/inc/menu.jsp"></jsp:include>    
+                    	<jsp:include page="/inc/menu.jsp"></jsp:include>
+                    	<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a></li>
                     </ul>
                 </div>
             </div>
@@ -80,12 +85,14 @@
 			<%
 				if(msg != null) {
 			%>
-					<%=msg%>
+					<div class="po3" align="center" style="color:yellow; font-size:30px;">
+						<%=msg%>
+					</div>
 			<%
 				}
 			%>
 			<a class="btn btn-warning po2" href="<%=request.getContextPath()%>/admin/insertCategoryForm.jsp">카테고리 추가</a>
-			<div align="center" style="margin-top:200px;">
+			<div align="center" style="margin-top:180px;">
 				<table class="table table-bordered" style="width:1300px; color:white;">
 					<tr style="background-color:black;">
 						<th>번호</th>

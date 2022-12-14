@@ -8,12 +8,24 @@
 	String memberId = request.getParameter("memberId");
 	int categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
 	String cashDate = request.getParameter("cashDate");
-	Long cashPrice = Long.parseLong(request.getParameter("cashPrice"));
+	
 	String cashMemo = request.getParameter("cashMemo");
 	int year = Integer.parseInt(request.getParameter("year"));
 	int month = Integer.parseInt(request.getParameter("month"));
 	int date = Integer.parseInt(request.getParameter("date"));
 	
+	long cashPrice = 0;
+	
+	if(request.getParameter("cashPrice") == null || request.getParameter("cashMemo") == null || request.getParameter("cashPrice").equals("") || request.getParameter("cashMemo").equals("")) {
+		cashPrice = 0;
+		String msg = URLEncoder.encode("빈칸이 있습니다.", "utf-8");
+		response.sendRedirect(request.getContextPath()+"/cashDateList.jsp?msg="+msg+"&year="+year+"&month="+month+"&date="+date);
+		return;
+	}
+	
+	if(!request.getParameter("cashPrice").equals("")) {
+		cashPrice = Long.parseLong(request.getParameter("cashPrice"));
+	}
 	
 	// Model 불러올 매개값
 	Cash cash  = new Cash();

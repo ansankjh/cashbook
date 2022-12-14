@@ -5,7 +5,7 @@
 	int categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
 	String msg = request.getParameter("msg");
 	// System.out.println(categoryNo);
-	
+	Member loginMember = (Member)session.getAttribute("loginMember");
 	// Model
 	CategoryDao categoryDao = new CategoryDao();
 	Category ct = categoryDao.selectCategory(categoryNo);
@@ -26,6 +26,10 @@
 				position : relative;
 				bottom : 10px;
 			}
+			.po {
+				position : relative;
+				top : 150px;
+			}
 		</style>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -42,13 +46,30 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
 	</head>
-	<body>
+	<body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand " href="#page-top"><%=loginMember.getMemberName()%>님(등급:<%=loginMember.getMemberLevel()%>)</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/admin/categoryList.jsp" style="font-size:30px;">뒤로</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 		<div class="container">
 			<h1 class="po1" align="center" style="color:white">카테고리수정</h1>
 			<%
 				if(msg != null) {
 			%>
-					<%=msg%>
+					<div class="po" align="center" style="color:yellow; font-size:30px;">
+						<%=msg%>
+					</div>
 			<%
 				}
 			%>

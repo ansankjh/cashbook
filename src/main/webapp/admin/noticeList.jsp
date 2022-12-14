@@ -77,7 +77,8 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                     	<li class="nav-item"></li>
-                    	<jsp:include page="/inc/menu.jsp"></jsp:include>    
+                    	<jsp:include page="/inc/menu.jsp"></jsp:include> 
+                    	<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a></li>  
                     </ul>
                 </div>
             </div>
