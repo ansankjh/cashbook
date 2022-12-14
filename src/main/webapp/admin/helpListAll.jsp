@@ -43,6 +43,10 @@
 				position : relative;
 				top : 150px;
 			}
+			.po1 {
+				position : relative;
+				top : 150px;
+			}
 		</style>
 		<meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -83,7 +87,9 @@
 			<%
 				if(msg !=null) {
 			%>
-					<%=msg%>
+					<div class="po1" align="center" style="color:yellow; font-size:30px;">
+						<%=msg%>
+					</div>
 			<%
 				}
 			%>
