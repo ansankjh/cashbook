@@ -151,18 +151,18 @@
 						}
 					%>
 				</table>
-				<div class="po_page" align="center" style="text-decoration : none;">
+				<div class="po_page" align="center">
 				<!-- 페이징 -->
 				<%
 					if(year > minYear) {
 				%>
-						<a href="<%=request.getContextPath()%>/statsMain.jsp?year=<%=year-1%>">이전년도</a>
+						<a style="text-decoration : none;" href="<%=request.getContextPath()%>/statsMain.jsp?year=<%=year-1%>">이전년도</a>
 				<%
 					}
 				
 					if(year < maxYear) {
 				%>
-						<a href="<%=request.getContextPath()%>/statsMain.jsp?year=<%=year+1%>">다음년도</a>
+						<a style="text-decoration : none;" href="<%=request.getContextPath()%>/statsMain.jsp?year=<%=year+1%>">다음년도</a>
 				<%
 					}
 				%>

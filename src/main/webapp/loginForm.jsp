@@ -67,10 +67,10 @@
 					<div class="row align-items-stretch mb-5">
 						<div class="col-md-6">
 							<div class="form-group">
-								<input style="width:400px;" id="name" type="text" placeholder="Your Id *" data-sb-validations="required" name="memberId">
+								<input style="width:400px;" id="id" type="text" placeholder="Your Id *" data-sb-validations="required" name="memberId">
 							</div>
 							<div class="form-group">
-								<input style="width:400px;" id="email" type="password" placeholder="Your Password *" data-sb-validations="required,email" name="memberPw">
+								<input style="width:400px;" id="pw" type="password" placeholder="Your Password *" data-sb-validations="required,email" name="memberPw">
 							</div>
 						</div>
 						<div class="col-md-6">
