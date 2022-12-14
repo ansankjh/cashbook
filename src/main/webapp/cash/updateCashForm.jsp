@@ -81,7 +81,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/cashDateList.jsp?year=<%=year%>&month=<%=month%>&date=<%=date%>">뒤로</a></li>
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/cashDateList.jsp?year=<%=year%>&month=<%=month%>&date=<%=date%>" style="font-size:30px;">뒤로</a></li>
                     </ul>
                 </div>
             </div>
